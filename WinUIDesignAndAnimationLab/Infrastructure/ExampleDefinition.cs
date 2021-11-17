@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using WinUIDesignAndAnimationLab.Demos;
+using WinUIDesignAndAnimationLab.Demos.GalaxyShuttles;
+using WinUIDesignAndAnimationLab.Demos.LikeButtons;
 
 namespace WinUIDesignAndAnimationLab
 {
@@ -58,12 +60,12 @@ namespace WinUIDesignAndAnimationLab
           //new ExampleDefinition("Blend Mix Image", typeof(BlendMixImage)),
           //new ExampleDefinition("Blend Mix Text", typeof(BlendMixText)),
           //new ExampleDefinition("Bubble Button", typeof(BubbleButtonDemo),new Uri("https://github.com/cnbluefire/BubbleButton")),
-          //new ExampleDefinition("Twitter Like Button", typeof(MattHenleysLikeButton)),
+          new ExampleDefinition("Twitter Like Button", typeof(MattHenleysLikeButton)),
           new ExampleDefinition("Walking Cat", typeof(WalkingCat)),
           new ExampleDefinition("Transparent Cube", typeof(TransparentCube)),
           //new ExampleDefinition("Acrylic and Blur", typeof(AcrylicAndBlurDemo)),
           //  new ExampleDefinition("Control Center", typeof(ControlCenterDemo)),
-          //     new ExampleDefinition("Galaxy Shuttle", typeof(GalaxyShuttleDemo)),
+               new ExampleDefinition("Galaxy Shuttle", typeof(GalaxyShuttleDemo)),
             //// Visual demos.
             //new ExampleDefinition("Burning Text", typeof(BurningTextExample)),
             //new ExampleDefinition("Mandelbrot", typeof(Mandelbrot)),

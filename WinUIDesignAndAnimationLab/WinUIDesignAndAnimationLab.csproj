@@ -17,11 +17,8 @@
     <Compile Remove="Demos\BlendMixImage\**" />
     <Compile Remove="Demos\BlendMixText\**" />
     <Compile Remove="Demos\BubbleButton\**" />
-    <Compile Remove="Demos\ControlCenter\**" />
-    <Compile Remove="Demos\GalaxyShuttles\**" />
     <Compile Remove="Demos\GlitchArtDemo\**" />
     <Compile Remove="Demos\GooeyButtonDemo\**" />
-    <Compile Remove="Demos\LikeButtons\**" />
     <Compile Remove="Demos\LiquidFill\**" />
     <Compile Remove="Demos\PopupUserControl\**" />
     <Compile Remove="Demos\ThreeActionsWithOneClick\**" />
@@ -29,11 +26,8 @@
     <EmbeddedResource Remove="Demos\BlendMixImage\**" />
     <EmbeddedResource Remove="Demos\BlendMixText\**" />
     <EmbeddedResource Remove="Demos\BubbleButton\**" />
-    <EmbeddedResource Remove="Demos\ControlCenter\**" />
-    <EmbeddedResource Remove="Demos\GalaxyShuttles\**" />
     <EmbeddedResource Remove="Demos\GlitchArtDemo\**" />
     <EmbeddedResource Remove="Demos\GooeyButtonDemo\**" />
-    <EmbeddedResource Remove="Demos\LikeButtons\**" />
     <EmbeddedResource Remove="Demos\LiquidFill\**" />
     <EmbeddedResource Remove="Demos\PopupUserControl\**" />
     <EmbeddedResource Remove="Demos\ThreeActionsWithOneClick\**" />
@@ -41,11 +35,8 @@
     <None Remove="Demos\BlendMixImage\**" />
     <None Remove="Demos\BlendMixText\**" />
     <None Remove="Demos\BubbleButton\**" />
-    <None Remove="Demos\ControlCenter\**" />
-    <None Remove="Demos\GalaxyShuttles\**" />
     <None Remove="Demos\GlitchArtDemo\**" />
     <None Remove="Demos\GooeyButtonDemo\**" />
-    <None Remove="Demos\LikeButtons\**" />
     <None Remove="Demos\LiquidFill\**" />
     <None Remove="Demos\PopupUserControl\**" />
     <None Remove="Demos\ThreeActionsWithOneClick\**" />
@@ -53,11 +44,8 @@
     <Page Remove="Demos\BlendMixImage\**" />
     <Page Remove="Demos\BlendMixText\**" />
     <Page Remove="Demos\BubbleButton\**" />
-    <Page Remove="Demos\ControlCenter\**" />
-    <Page Remove="Demos\GalaxyShuttles\**" />
     <Page Remove="Demos\GlitchArtDemo\**" />
     <Page Remove="Demos\GooeyButtonDemo\**" />
-    <Page Remove="Demos\LikeButtons\**" />
     <Page Remove="Demos\LiquidFill\**" />
     <Page Remove="Demos\PopupUserControl\**" />
     <Page Remove="Demos\ThreeActionsWithOneClick\**" />
@@ -74,6 +62,7 @@
   <ItemGroup>
     <None Remove="Controls\GooeyButton.xaml" />
     <None Remove="Controls\GooeyButtonItem.xaml" />
+    <None Remove="Demos\GalaxyShuttles\Galaxy.png" />
     <None Remove="MainPage.xaml" />
     <None Remove="Themes\BubbleButton.xaml" />
     <None Remove="Themes\BubbleButtonStyle.xaml" />
@@ -109,6 +98,7 @@
     <Content Include="Assets\Square44x44Logo.targetsize-24_altform-unplated.png" />
     <Content Include="Assets\StoreLogo.png" />
     <Content Include="Assets\Wide310x150Logo.scale-200.png" />
+    <Content Include="Demos\GalaxyShuttles\Galaxy.png" />
     <Content Include="Thumbnails\AcrylicandBlur.png" />
     <Content Include="Thumbnails\BlendMixImage.png" />
     <Content Include="Thumbnails\BlendMixText.png" />
@@ -145,7 +135,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Controls\" />
-    <Folder Include="新文件夹\" />
   </ItemGroup>
   <ItemGroup>
     <PRIResource Remove="Demos\AcrylicAndBlur\**" />
@@ -160,19 +149,10 @@
     <PRIResource Remove="Demos\BubbleButton\**" />
   </ItemGroup>
   <ItemGroup>
-    <PRIResource Remove="Demos\ControlCenter\**" />
-  </ItemGroup>
-  <ItemGroup>
-    <PRIResource Remove="Demos\GalaxyShuttles\**" />
-  </ItemGroup>
-  <ItemGroup>
     <PRIResource Remove="Demos\GlitchArtDemo\**" />
   </ItemGroup>
   <ItemGroup>
     <PRIResource Remove="Demos\GooeyButtonDemo\**" />
-  </ItemGroup>
-  <ItemGroup>
-    <PRIResource Remove="Demos\LikeButtons\**" />
   </ItemGroup>
   <ItemGroup>
     <PRIResource Remove="Demos\LiquidFill\**" />
