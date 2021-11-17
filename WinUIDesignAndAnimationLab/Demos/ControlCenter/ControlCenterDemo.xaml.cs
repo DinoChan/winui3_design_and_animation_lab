@@ -5,7 +5,7 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
-using Windows.UI.Xaml;
+using Microsoft.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
 using Windows.UI.Xaml.Data;
@@ -24,6 +24,7 @@ namespace WinUIDesignAndAnimationLab.Demos
     {
         public ControlCenterDemo()
         {
+            RevealBorderBrush
             this.InitializeComponent();
         }
     }
