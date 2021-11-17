@@ -12,6 +12,15 @@
     <EnablePreviewMsixTooling>true</EnablePreviewMsixTooling>
     <SupportedOSPlatformVersion>10.0.19041.0</SupportedOSPlatformVersion>
   </PropertyGroup>
+  <ItemGroup>
+    <Compile Remove="Controls\GooeyButton.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="Controls\GooeyButton.xaml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Remove="Controls\GooeyButton.xaml" />
+  </ItemGroup>
 
   <ItemGroup>
     <Content Include="Assets\SplashScreen.scale-200.png" />
@@ -42,5 +51,10 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="新文件夹\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="Controls\GooeyButtonItem.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
 </Project>
