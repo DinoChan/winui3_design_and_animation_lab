@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.UI.Xaml;
 
-namespace DesignAndAnimationLab
+namespace WinUIDesignAndAnimationLab
 {
     public partial class ProgressButton
     {

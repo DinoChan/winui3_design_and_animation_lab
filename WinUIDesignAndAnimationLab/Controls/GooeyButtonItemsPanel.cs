@@ -10,7 +10,7 @@ using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Media.Animation;
 
-namespace DesignAndAnimationLab
+namespace WinUIDesignAndAnimationLab
 {
     public class GooeyButtonItemsPanel : Canvas
     {

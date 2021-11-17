@@ -13,7 +13,7 @@ using System.Diagnostics;
 using Microsoft.UI.Xaml.Media.Animation;
 using Microsoft.UI.Input;
 
-namespace DesignAndAnimationLab
+namespace WinUIDesignAndAnimationLab
 {
     [TemplateVisualState(GroupName = ProgressStatesGroupName, Name = IdleStateName)]
     [TemplateVisualState(GroupName = ProgressStatesGroupName, Name = InProgressStateName)]

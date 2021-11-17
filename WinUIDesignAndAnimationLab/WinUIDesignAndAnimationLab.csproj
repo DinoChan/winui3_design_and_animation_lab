@@ -13,13 +13,92 @@
     <SupportedOSPlatformVersion>10.0.19041.0</SupportedOSPlatformVersion>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Remove="Demos\AcrylicAndBlur\**" />
+    <Compile Remove="Demos\BlendMixImage\**" />
+    <Compile Remove="Demos\BlendMixText\**" />
+    <Compile Remove="Demos\BubbleButton\**" />
+    <Compile Remove="Demos\ControlCenter\**" />
+    <Compile Remove="Demos\GalaxyShuttles\**" />
+    <Compile Remove="Demos\GlitchArtDemo\**" />
+    <Compile Remove="Demos\GooeyButtonDemo\**" />
+    <Compile Remove="Demos\LikeButtons\**" />
+    <Compile Remove="Demos\LiquidFill\**" />
+    <Compile Remove="Demos\PopupUserControl\**" />
+    <Compile Remove="Demos\ThreeActionsWithOneClick\**" />
+    <EmbeddedResource Remove="Demos\AcrylicAndBlur\**" />
+    <EmbeddedResource Remove="Demos\BlendMixImage\**" />
+    <EmbeddedResource Remove="Demos\BlendMixText\**" />
+    <EmbeddedResource Remove="Demos\BubbleButton\**" />
+    <EmbeddedResource Remove="Demos\ControlCenter\**" />
+    <EmbeddedResource Remove="Demos\GalaxyShuttles\**" />
+    <EmbeddedResource Remove="Demos\GlitchArtDemo\**" />
+    <EmbeddedResource Remove="Demos\GooeyButtonDemo\**" />
+    <EmbeddedResource Remove="Demos\LikeButtons\**" />
+    <EmbeddedResource Remove="Demos\LiquidFill\**" />
+    <EmbeddedResource Remove="Demos\PopupUserControl\**" />
+    <EmbeddedResource Remove="Demos\ThreeActionsWithOneClick\**" />
+    <None Remove="Demos\AcrylicAndBlur\**" />
+    <None Remove="Demos\BlendMixImage\**" />
+    <None Remove="Demos\BlendMixText\**" />
+    <None Remove="Demos\BubbleButton\**" />
+    <None Remove="Demos\ControlCenter\**" />
+    <None Remove="Demos\GalaxyShuttles\**" />
+    <None Remove="Demos\GlitchArtDemo\**" />
+    <None Remove="Demos\GooeyButtonDemo\**" />
+    <None Remove="Demos\LikeButtons\**" />
+    <None Remove="Demos\LiquidFill\**" />
+    <None Remove="Demos\PopupUserControl\**" />
+    <None Remove="Demos\ThreeActionsWithOneClick\**" />
+    <Page Remove="Demos\AcrylicAndBlur\**" />
+    <Page Remove="Demos\BlendMixImage\**" />
+    <Page Remove="Demos\BlendMixText\**" />
+    <Page Remove="Demos\BubbleButton\**" />
+    <Page Remove="Demos\ControlCenter\**" />
+    <Page Remove="Demos\GalaxyShuttles\**" />
+    <Page Remove="Demos\GlitchArtDemo\**" />
+    <Page Remove="Demos\GooeyButtonDemo\**" />
+    <Page Remove="Demos\LikeButtons\**" />
+    <Page Remove="Demos\LiquidFill\**" />
+    <Page Remove="Demos\PopupUserControl\**" />
+    <Page Remove="Demos\ThreeActionsWithOneClick\**" />
+  </ItemGroup>
+  <ItemGroup>
     <Compile Remove="Controls\GooeyButton.cs" />
+    <Compile Remove="Controls\GooeyButtonItem.cs" />
+    <Compile Remove="Controls\GooeyButtonItemsPanel.cs" />
+    <Compile Remove="Controls\ProgressButton.Constants.cs" />
+    <Compile Remove="Controls\ProgressButton.cs" />
+    <Compile Remove="Controls\ProgressButton.Properties.cs" />
+    <Compile Remove="Controls\ProgressState.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Remove="Controls\GooeyButton.xaml" />
+    <None Remove="Controls\GooeyButtonItem.xaml" />
+    <None Remove="MainPage.xaml" />
+    <None Remove="Themes\BubbleButton.xaml" />
+    <None Remove="Themes\BubbleButtonStyle.xaml" />
+    <None Remove="Themes\ProgressButton.xaml" />
+    <None Remove="Thumbnails\AcrylicandBlur.png" />
+    <None Remove="Thumbnails\BlendMixImage.png" />
+    <None Remove="Thumbnails\BlendMixText.png" />
+    <None Remove="Thumbnails\BubbleButton.png" />
+    <None Remove="Thumbnails\ControlCenter.png" />
+    <None Remove="Thumbnails\GalaxyShuttle.png" />
+    <None Remove="Thumbnails\GlitchArt.png" />
+    <None Remove="Thumbnails\GlitchArtManyWords.png" />
+    <None Remove="Thumbnails\GooeyButton.png" />
+    <None Remove="Thumbnails\PopupUserControl.png" />
+    <None Remove="Thumbnails\ThreeActionsWithOneClick.png" />
+    <None Remove="Thumbnails\TransparentCube.png" />
+    <None Remove="Thumbnails\TwitterLikeButton.png" />
+    <None Remove="Thumbnails\WalkingCat.png" />
   </ItemGroup>
   <ItemGroup>
     <Page Remove="Controls\GooeyButton.xaml" />
+    <Page Remove="Controls\GooeyButtonItem.xaml" />
+    <Page Remove="Themes\BubbleButton.xaml" />
+    <Page Remove="Themes\BubbleButtonStyle.xaml" />
+    <Page Remove="Themes\ProgressButton.xaml" />
   </ItemGroup>
 
   <ItemGroup>
@@ -30,6 +109,20 @@
     <Content Include="Assets\Square44x44Logo.targetsize-24_altform-unplated.png" />
     <Content Include="Assets\StoreLogo.png" />
     <Content Include="Assets\Wide310x150Logo.scale-200.png" />
+    <Content Include="Thumbnails\AcrylicandBlur.png" />
+    <Content Include="Thumbnails\BlendMixImage.png" />
+    <Content Include="Thumbnails\BlendMixText.png" />
+    <Content Include="Thumbnails\BubbleButton.png" />
+    <Content Include="Thumbnails\ControlCenter.png" />
+    <Content Include="Thumbnails\GalaxyShuttle.png" />
+    <Content Include="Thumbnails\GlitchArt.png" />
+    <Content Include="Thumbnails\GlitchArtManyWords.png" />
+    <Content Include="Thumbnails\GooeyButton.png" />
+    <Content Include="Thumbnails\PopupUserControl.png" />
+    <Content Include="Thumbnails\ThreeActionsWithOneClick.png" />
+    <Content Include="Thumbnails\TransparentCube.png" />
+    <Content Include="Thumbnails\TwitterLikeButton.png" />
+    <Content Include="Thumbnails\WalkingCat.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -37,6 +130,7 @@
     <PackageReference Include="CommunityToolkit.WinUI.UI.Animations" Version="7.1.1-preview3.1" />
     <PackageReference Include="CommunityToolkit.WinUI.UI.Controls" Version="7.1.1-preview3.1" />
     <PackageReference Include="CommunityToolkit.WinUI.UI.Controls.Media" Version="7.1.1-preview3.1" />
+    <PackageReference Include="CommunityToolkit.WinUI.UI.Media" Version="7.1.1-preview3.1" />
     <PackageReference Include="Microsoft.Graphics.Win2D" Version="1.0.0.30" />
     <PackageReference Include="Microsoft.WindowsAppSDK" Version="1.0.0" />
     <PackageReference Include="Microsoft.Windows.SDK.BuildTools" Version="10.0.22000.194" />
@@ -50,10 +144,47 @@
     <ProjectCapability Include="Msix" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Controls\" />
     <Folder Include="新文件夹\" />
   </ItemGroup>
   <ItemGroup>
-    <Page Update="Controls\GooeyButtonItem.xaml">
+    <PRIResource Remove="Demos\AcrylicAndBlur\**" />
+  </ItemGroup>
+  <ItemGroup>
+    <PRIResource Remove="Demos\BlendMixImage\**" />
+  </ItemGroup>
+  <ItemGroup>
+    <PRIResource Remove="Demos\BlendMixText\**" />
+  </ItemGroup>
+  <ItemGroup>
+    <PRIResource Remove="Demos\BubbleButton\**" />
+  </ItemGroup>
+  <ItemGroup>
+    <PRIResource Remove="Demos\ControlCenter\**" />
+  </ItemGroup>
+  <ItemGroup>
+    <PRIResource Remove="Demos\GalaxyShuttles\**" />
+  </ItemGroup>
+  <ItemGroup>
+    <PRIResource Remove="Demos\GlitchArtDemo\**" />
+  </ItemGroup>
+  <ItemGroup>
+    <PRIResource Remove="Demos\GooeyButtonDemo\**" />
+  </ItemGroup>
+  <ItemGroup>
+    <PRIResource Remove="Demos\LikeButtons\**" />
+  </ItemGroup>
+  <ItemGroup>
+    <PRIResource Remove="Demos\LiquidFill\**" />
+  </ItemGroup>
+  <ItemGroup>
+    <PRIResource Remove="Demos\PopupUserControl\**" />
+  </ItemGroup>
+  <ItemGroup>
+    <PRIResource Remove="Demos\ThreeActionsWithOneClick\**" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="MainPage.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>

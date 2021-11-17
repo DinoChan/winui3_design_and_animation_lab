@@ -26,11 +26,19 @@ namespace WinUIDesignAndAnimationLab
         public MainWindow()
         {
             this.InitializeComponent();
+            rootFrame.Loaded += RootFrame_Loaded;
         }
 
-        private void myButton_Click(object sender, RoutedEventArgs e)
+        private void RootFrame_Loaded(object sender, RoutedEventArgs e)
         {
-            myButton.Content = "Clicked";
+            try
+            {
+                rootFrame.Navigate(typeof(MainPage));
+            }
+            catch (Exception ex)
+            {
+
+            }
         }
     }
 }

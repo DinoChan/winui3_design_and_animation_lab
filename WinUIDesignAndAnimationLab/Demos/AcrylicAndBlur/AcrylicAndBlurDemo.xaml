@@ -1,0 +1,172 @@
+﻿<Page x:Class="WinUIDesignAndAnimationLab.Demos.AcrylicAndBlurDemo"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:brushes="using:CommunityToolkit.WinUI.UI.Media"
+      xmlns:controls="using:CommunityToolkit.WinUI.UI.Controls"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:effects="using:Microsoft.Toolkit.Uwp.UI.Media"
+      xmlns:local="using:WinUIDesignAndAnimationLab.Demos"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:media="using:Microsoft.UI.Xaml.Media"
+      Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+      RequestedTheme="Light"
+      mc:Ignorable="d">
+    <Page.Resources>
+        <media:AcrylicBrush x:Key="CustomAcrylicBackgroundBrush"
+                            BackgroundSource="HostBackdrop"
+                            FallbackColor="DarkSlateBlue"
+                            TintColor="#429ce3"
+                            TintOpacity="0" />
+
+        <brushes:AcrylicBrush x:Key="DarkBorderBrush"
+                              BackgroundSource="HostBackdrop"
+                              FallbackColor="Black"
+                              TintColor="Black"
+                              TintOpacity="0.5" />
+
+        <brushes:AcrylicBrush x:Key="LightBorderBrush"
+                              BackgroundSource="HostBackdrop"
+                              FallbackColor="White"
+                              TintColor="White"
+                              TintOpacity="0.3" />
+
+        <brushes:AcrylicBrush x:Key="ToolkitAcrylicBrush"
+                              BackgroundSource="HostBackdrop"
+                              BlurAmount="12"
+                              FallbackColor="DarkSlateBlue"
+                              TextureUri="ms-appx:///Assets/BrushAssets/NoiseTexture.png"
+                              TintColor="#429ce3"
+                              TintOpacity="0" />
+
+        <local:HostBackdropBlurBrush x:Key="HostBackdropBlurBrush" />
+
+        <brushes:PipelineBrush x:Key="PipelineBrush" Source="{effects:BackdropSource BackgroundSource=HostBackdrop}">
+            <effects:LuminanceToAlphaEffect />
+            <effects:OpacityEffect x:Name="OpacityEffect" Value="0.4" />
+            <effects:BlendEffect Mode="Multiply" Source="{effects:BackdropSource BackgroundSource=HostBackdrop}" />
+            <effects:BlurEffect Amount="16" />
+            <effects:ShadeEffect Intensity="0.2" Color="#FF222222" />
+            <effects:BlendEffect Mode="Overlay" Source="{effects:TileSource Uri=ms-appx:///Assets/BrushAssets/NoiseTexture.png}" />
+        </brushes:PipelineBrush>
+
+        <Style TargetType="ContentControl">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ContentControl">
+                        <controls:DropShadowPanel Margin="36"
+                                                  VerticalAlignment="Top"
+                                                  HorizontalContentAlignment="Left"
+                                                  BlurRadius="7"
+                                                  Color="White">
+                            <TextBlock FontSize="36" Text="{TemplateBinding Content}" />
+                        </controls:DropShadowPanel>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style TargetType="Slider">
+            <Setter Property="Margin" Value="8" />
+            <Setter Property="Maximum" Value="1" />
+            <Setter Property="StepFrequency" Value="0.01" />
+        </Style>
+
+        <Style TargetType="controls:ColorPickerButton">
+            <Setter Property="Margin" Value="8" />
+            <Setter Property="Width" Value="134" />
+        </Style>
+    </Page.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Grid Padding="8" Background="{StaticResource CustomAcrylicBackgroundBrush}">
+            <ContentControl Content="AcrylicBrush" />
+            <StackPanel Width="300" HorizontalAlignment="Right">
+                <Slider Header="TintOpacity" Value="{Binding TintOpacity, Source={StaticResource CustomAcrylicBackgroundBrush}, Mode=TwoWay}" />
+                <Slider Header="TintLuminosityOpacity" Value="{Binding TintLuminosityOpacity, Source={StaticResource CustomAcrylicBackgroundBrush}, Mode=TwoWay}" />
+                <controls:WrapPanel>
+                    <controls:ColorPickerButton Content="TintColor" SelectedColor="{Binding TintColor, Source={StaticResource CustomAcrylicBackgroundBrush}, Mode=TwoWay}" />
+                    <controls:ColorPickerButton Content="FallbackColor" SelectedColor="{Binding FallbackColor, Source={StaticResource CustomAcrylicBackgroundBrush}, Mode=TwoWay}" />
+                </controls:WrapPanel>
+            </StackPanel>
+        </Grid>
+
+        <Grid Grid.Row="1"
+              Padding="8"
+              Background="{StaticResource ToolkitAcrylicBrush}">
+            <ContentControl Content="ToolkitAcrylicBrush" />
+            <StackPanel Width="300" HorizontalAlignment="Right">
+                <Slider Header="TintOpacity" Value="{Binding TintOpacity, Source={StaticResource ToolkitAcrylicBrush}, Mode=TwoWay}" />
+                <Slider Header="BlurAmount"
+                        Maximum="32"
+                        Value="{Binding BlurAmount, Source={StaticResource ToolkitAcrylicBrush}, Mode=TwoWay}" />
+                <controls:ColorPickerButton Content="TintColor" SelectedColor="{Binding TintColor, Source={StaticResource ToolkitAcrylicBrush}, Mode=TwoWay}" />
+            </StackPanel>
+        </Grid>
+
+        <Grid Grid.Row="2"
+              Padding="8"
+              Background="{StaticResource HostBackdropBlurBrush}">
+            <ContentControl Content="HostBackdropBlurBrush" />
+            <StackPanel Width="300" HorizontalAlignment="Right">
+                <Slider Header="Amount"
+                        Maximum="32"
+                        Value="{Binding Amount, Source={StaticResource HostBackdropBlurBrush}, Mode=TwoWay}" />
+            </StackPanel>
+        </Grid>
+
+
+        <!--<Grid Grid.Row="3" Background="{StaticResource PipelineBrush}">
+            <ContentControl Content="PipelineBrush" />
+            <StackPanel Width="300" HorizontalAlignment="Right">
+                <Slider Header="Amount" Value="{x:Bind OpacityEffect.Value, Mode=TwoWay}" />
+            </StackPanel>
+        </Grid>-->
+
+        <Grid Grid.Row="4"
+              Padding="8"
+              Background="{x:Bind CustomPipelineBrush, Mode=OneWay}">
+            <ContentControl Content="CustomPipelineBrush" />
+            <StackPanel Width="300"
+                        HorizontalAlignment="Right"
+                        BorderBrush="{StaticResource DarkBorderBrush}"
+                        BorderThickness="1"
+                        CornerRadius="8"
+                        RequestedTheme="Dark">
+                <StackPanel Background="{x:Bind CustomPipelineBrushDark, Mode=OneWay}"
+                            BorderBrush="{StaticResource LightBorderBrush}"
+                            BorderThickness="1"
+                            CornerRadius="8">
+                    <CheckBox Margin="10,10,10,0"
+                              Content="LuminanceToAlpha"
+                              IsChecked="{x:Bind HasLuminanceToAlpha, Mode=TwoWay}" />
+                    <CheckBox Margin="10,0"
+                              Content="Opacity"
+                              IsChecked="{x:Bind HasOpacity, Mode=TwoWay}" />
+                    <Slider Margin="40,0,10,0" Value="{x:Bind EffectOpacity, Mode=TwoWay}" />
+                    <CheckBox Margin="10,0"
+                              Content="Blur"
+                              IsChecked="{x:Bind HasBlur, Mode=TwoWay}" />
+                    <Slider Margin="40,0,10,0"
+                            Maximum="32"
+                            Value="{x:Bind BlurAmount, Mode=TwoWay}" />
+                    <CheckBox Margin="10,0"
+                              Content="Shade"
+                              IsChecked="{x:Bind HasShade, Mode=TwoWay}" />
+                    <controls:ColorPickerButton Margin="40,0,0,0"
+                                                Content="Color"
+                                                SelectedColor="{x:Bind ShadeColor, Mode=TwoWay}" />
+                    <Slider Margin="40,0,10,0" Value="{x:Bind ShadeIntensity, Mode=TwoWay}" />
+
+                    <Button HorizontalAlignment="Stretch"
+                            Click="OnAcceptCustomBrush"
+                            Content="Accept"
+                            Style="{StaticResource ButtonRevealStyle}" />
+                </StackPanel>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</Page>
