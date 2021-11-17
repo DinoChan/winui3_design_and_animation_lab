@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "WinUIDesignAndAnimationLab (Package)": {
+      "commandName": "MsixPackage"
+    },
+    "WinUIDesignAndAnimationLab (Unpackaged)": {
+      "commandName": "Project"
+    }
+  }
+}
