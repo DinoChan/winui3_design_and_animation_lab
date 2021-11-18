@@ -1,5 +1,4 @@
 ﻿using Microsoft.Graphics.Canvas.Effects;
-using Microsoft.Toolkit.Uwp.UI.Animations;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -10,18 +9,21 @@ using System.Threading.Tasks;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI;
-using Windows.UI.Composition;
+using Microsoft.UI;
+using Microsoft.UI.Composition;
 using Windows.UI.Text;
 using Windows.UI.Xaml;
-using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Hosting;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
-using Windows.UI.Xaml.Media.Animation;
-using Windows.UI.Xaml.Navigation;
-using Windows.UI.Xaml.Shapes;
+using Microsoft.UI.Xaml.Controls;
+using Microsoft.UI.Xaml.Controls.Primitives;
+using Microsoft.UI.Xaml.Data;
+using Microsoft.UI.Xaml.Hosting;
+using Microsoft.UI.Xaml.Input;
+using Microsoft.UI.Xaml.Media;
+using Microsoft.UI.Xaml.Media.Animation;
+using Microsoft.UI.Xaml.Navigation;
+using Microsoft.UI.Xaml.Shapes;
+using Microsoft.UI.Text;
+using Microsoft.UI.Xaml;
 
 //https://go.microsoft.com/fwlink/?LinkId=234236 上介绍了“用户控件”项模板
 
@@ -29,7 +31,7 @@ namespace WinUIDesignAndAnimationLab.Demos.GlitchArtDemo
 {
     public sealed partial class GlitchText3 : UserControl
     {
-        private Compositor Compositor => Window.Current.Compositor;
+        private Compositor Compositor => MainWindow.CurrentWindow.Compositor;
         public string Text { get; }
         public GlitchText3()
         {
@@ -110,7 +112,7 @@ namespace WinUIDesignAndAnimationLab.Demos.GlitchArtDemo
 
         private CompositionBrush CreateBrush(CompositionBrush foreground, CompositionBrush background, BlendEffectMode blendEffectMode)
         {
-            var compositor = Window.Current.Compositor;
+            var compositor = this.Compositor;
             var effect = new BlendEffect()
             {
                 Mode = blendEffectMode,
@@ -127,7 +129,7 @@ namespace WinUIDesignAndAnimationLab.Demos.GlitchArtDemo
 
         private (CompositionBrush, CompositionSurfaceBrush) CreateMaskedBrush(CompositionBrush source)
         {
-            var compositor = Window.Current.Compositor;
+            var compositor = this.Compositor;
             var effect = new AlphaMaskEffect()
             {
                 Source = new CompositionEffectSourceParameter("Source"),

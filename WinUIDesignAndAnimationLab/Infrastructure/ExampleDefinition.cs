@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using WinUIDesignAndAnimationLab.Demos;
 using WinUIDesignAndAnimationLab.Demos.GalaxyShuttles;
+using WinUIDesignAndAnimationLab.Demos.GlitchArtDemo;
 using WinUIDesignAndAnimationLab.Demos.LikeButtons;
 
 namespace WinUIDesignAndAnimationLab
@@ -55,10 +56,10 @@ namespace WinUIDesignAndAnimationLab
           //new ExampleDefinition("Three Actions With One Click", typeof(ThreeActionsWithOneClick)),
           //new ExampleDefinition("Popup UserControl", typeof(PopupUserControlDemo)),
           //new ExampleDefinition("Gooey Button", typeof(GooeyButtonDemoPage)),
-          //new ExampleDefinition("Glitch Art", typeof(GlitchArtDemoPage)),
-          //new ExampleDefinition("Glitch Art Many Words", typeof(GlitchArtWithManyWordsDemoPage)),
-          //new ExampleDefinition("Blend Mix Image", typeof(BlendMixImage)),
-          //new ExampleDefinition("Blend Mix Text", typeof(BlendMixText)),
+          new ExampleDefinition("Glitch Art", typeof(GlitchArtDemoPage)),
+          new ExampleDefinition("Glitch Art Many Words", typeof(GlitchArtWithManyWordsDemoPage)),
+          new ExampleDefinition("Blend Mix Image", typeof(BlendMixImage)),
+          new ExampleDefinition("Blend Mix Text", typeof(BlendMixText)),
           //new ExampleDefinition("Bubble Button", typeof(BubbleButtonDemo),new Uri("https://github.com/cnbluefire/BubbleButton")),
           new ExampleDefinition("Twitter Like Button", typeof(MattHenleysLikeButton)),
           new ExampleDefinition("Walking Cat", typeof(WalkingCat)),

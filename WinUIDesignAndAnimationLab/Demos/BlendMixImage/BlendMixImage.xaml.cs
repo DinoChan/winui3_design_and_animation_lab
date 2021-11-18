@@ -8,8 +8,8 @@ using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI;
-using Windows.UI.Composition;
-using Windows.UI.Xaml;
+using Microsoft.UI.Composition;
+using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Controls.Primitives;
 using Microsoft.UI.Xaml.Data;
@@ -17,6 +17,7 @@ using Microsoft.UI.Xaml.Hosting;
 using Microsoft.UI.Xaml.Input;
 using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Navigation;
+using Microsoft.UI;
 
 //https://go.microsoft.com/fwlink/?LinkId=234236 上介绍了“用户控件”项模板
 
@@ -35,7 +36,7 @@ namespace WinUIDesignAndAnimationLab.Demos
 
         private SpriteVisual CreateVisual(string imageName)
         {
-            var compositor = Window.Current.Compositor;
+            var compositor = MainWindow.CurrentWindow.Compositor;
             var (foreground, foregroundBrush) = CreateBrush(imageName, Colors.Cyan);
             var (background, backgroundBrush) = CreateBrush(imageName, Colors.Red);
             foregroundBrush.Offset = new Vector2(10, 0);
@@ -51,7 +52,7 @@ namespace WinUIDesignAndAnimationLab.Demos
 
         private (CompositionBrush compositionBrush, CompositionSurfaceBrush compositionSurfaceBrush) CreateBrush(string imageName, Color color)
         {
-            var compositor = Window.Current.Compositor;
+            var compositor = MainWindow.CurrentWindow.Compositor;
             var loadedSurface = LoadedImageSurface.StartLoadFromUri(new Uri("ms-appx:///Assets/Images/" + imageName));
             var compositionSurfaceBrush = compositor.CreateSurfaceBrush();
             compositionSurfaceBrush.Surface = loadedSurface;
@@ -61,7 +62,7 @@ namespace WinUIDesignAndAnimationLab.Demos
 
         private CompositionBrush CreateBrush(CompositionBrush foreground, CompositionBrush background, BlendEffectMode blendEffectMode)
         {
-            var compositor = Window.Current.Compositor;
+            var compositor = MainWindow.CurrentWindow.Compositor;
             var effect = new BlendEffect()
             {
                 Mode = blendEffectMode,

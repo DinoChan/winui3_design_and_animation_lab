@@ -14,37 +14,29 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Remove="Demos\AcrylicAndBlur\**" />
-    <Compile Remove="Demos\BlendMixImage\**" />
-    <Compile Remove="Demos\BlendMixText\**" />
     <Compile Remove="Demos\BubbleButton\**" />
-    <Compile Remove="Demos\GlitchArtDemo\**" />
+    <Compile Remove="Demos\ControlCenter\**" />
     <Compile Remove="Demos\GooeyButtonDemo\**" />
     <Compile Remove="Demos\LiquidFill\**" />
     <Compile Remove="Demos\PopupUserControl\**" />
     <Compile Remove="Demos\ThreeActionsWithOneClick\**" />
     <EmbeddedResource Remove="Demos\AcrylicAndBlur\**" />
-    <EmbeddedResource Remove="Demos\BlendMixImage\**" />
-    <EmbeddedResource Remove="Demos\BlendMixText\**" />
     <EmbeddedResource Remove="Demos\BubbleButton\**" />
-    <EmbeddedResource Remove="Demos\GlitchArtDemo\**" />
+    <EmbeddedResource Remove="Demos\ControlCenter\**" />
     <EmbeddedResource Remove="Demos\GooeyButtonDemo\**" />
     <EmbeddedResource Remove="Demos\LiquidFill\**" />
     <EmbeddedResource Remove="Demos\PopupUserControl\**" />
     <EmbeddedResource Remove="Demos\ThreeActionsWithOneClick\**" />
     <None Remove="Demos\AcrylicAndBlur\**" />
-    <None Remove="Demos\BlendMixImage\**" />
-    <None Remove="Demos\BlendMixText\**" />
     <None Remove="Demos\BubbleButton\**" />
-    <None Remove="Demos\GlitchArtDemo\**" />
+    <None Remove="Demos\ControlCenter\**" />
     <None Remove="Demos\GooeyButtonDemo\**" />
     <None Remove="Demos\LiquidFill\**" />
     <None Remove="Demos\PopupUserControl\**" />
     <None Remove="Demos\ThreeActionsWithOneClick\**" />
     <Page Remove="Demos\AcrylicAndBlur\**" />
-    <Page Remove="Demos\BlendMixImage\**" />
-    <Page Remove="Demos\BlendMixText\**" />
     <Page Remove="Demos\BubbleButton\**" />
-    <Page Remove="Demos\GlitchArtDemo\**" />
+    <Page Remove="Demos\ControlCenter\**" />
     <Page Remove="Demos\GooeyButtonDemo\**" />
     <Page Remove="Demos\LiquidFill\**" />
     <Page Remove="Demos\PopupUserControl\**" />
@@ -140,16 +132,7 @@
     <PRIResource Remove="Demos\AcrylicAndBlur\**" />
   </ItemGroup>
   <ItemGroup>
-    <PRIResource Remove="Demos\BlendMixImage\**" />
-  </ItemGroup>
-  <ItemGroup>
-    <PRIResource Remove="Demos\BlendMixText\**" />
-  </ItemGroup>
-  <ItemGroup>
     <PRIResource Remove="Demos\BubbleButton\**" />
-  </ItemGroup>
-  <ItemGroup>
-    <PRIResource Remove="Demos\GlitchArtDemo\**" />
   </ItemGroup>
   <ItemGroup>
     <PRIResource Remove="Demos\GooeyButtonDemo\**" />
@@ -167,5 +150,8 @@
     <Page Update="MainPage.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <PRIResource Remove="Demos\ControlCenter\**" />
   </ItemGroup>
 </Project>

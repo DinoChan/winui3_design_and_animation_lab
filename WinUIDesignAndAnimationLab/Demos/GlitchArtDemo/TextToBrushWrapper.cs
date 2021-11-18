@@ -9,18 +9,19 @@ using System.Linq;
 using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
-using Windows.Graphics.DirectX;
+using Microsoft.Graphics.DirectX;
+using Microsoft.UI;
+using Microsoft.UI.Composition;
+using Microsoft.UI.Xaml;
+using Microsoft.UI.Xaml.Controls;
+using Microsoft.UI.Xaml.Media;
 using Windows.UI;
-using Windows.UI.Composition;
-using Windows.UI.Xaml;
-using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Media;
 
 namespace WinUIDesignAndAnimationLab.Demos.GlitchArtDemo
 {
     public class TextToBrushWrapper : Control
     {
-        private Compositor Compositor => Window.Current.Compositor;
+        private Compositor Compositor => MainWindow.CurrentWindow.Compositor;
 
         protected CompositionDrawingSurface DrawingSurface { get; private set; }
         private CompositionGraphicsDevice _graphicsDevice;

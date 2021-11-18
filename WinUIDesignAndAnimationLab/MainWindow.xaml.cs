@@ -26,8 +26,12 @@ namespace WinUIDesignAndAnimationLab
         public MainWindow()
         {
             this.InitializeComponent();
+
             rootFrame.Loaded += RootFrame_Loaded;
+            CurrentWindow = this;
         }
+
+        public static MainWindow CurrentWindow { get; set; }
 
         private void RootFrame_Loaded(object sender, RoutedEventArgs e)
         {
