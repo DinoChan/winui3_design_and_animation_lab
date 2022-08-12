@@ -13,30 +13,25 @@
             <ResourceDictionary.ThemeDictionaries>
                 <ResourceDictionary x:Key="Dark">
                     <RevealBorderBrush x:Key="RevealBorderBrush"
-                                       FallbackColor="Red"
                                        TargetTheme="Dark"
                                        Color="Transparent" />
                     <brushes:AcrylicBrush x:Key="LightBackgroundBrush"
-                                          BackgroundSource="Backdrop"
                                           BlurAmount="16"
                                           TintColor="Black"
                                           TintOpacity="0.3" />
 
                     <brushes:AcrylicBrush x:Key="DarkBackgroundBrush"
-                                          BackgroundSource="Backdrop"
                                           BlurAmount="16"
                                           TintColor="Black"
                                           TintOpacity="0.3" />
 
 
                     <brushes:AcrylicBrush x:Key="DarkBorderBrush"
-                                          BackgroundSource="Backdrop"
                                           BlurAmount="16"
                                           TintColor="Black"
                                           TintOpacity="0.5" />
 
                     <brushes:AcrylicBrush x:Key="LightBorderBrush"
-                                          BackgroundSource="Backdrop"
                                           BlurAmount="16"
                                           TintColor="White"
                                           TintOpacity="0.1" />
@@ -45,30 +40,26 @@
 
                 <ResourceDictionary x:Key="Light">
                     <RevealBorderBrush x:Key="RevealBorderBrush"
-                                       FallbackColor="Red"
+                                     
                                        TargetTheme="Light"
                                        Color="Transparent" />
                     <brushes:AcrylicBrush x:Key="LightBackgroundBrush"
-                                          BackgroundSource="Backdrop"
                                           BlurAmount="16"
                                           TintColor="White"
                                           TintOpacity="0.3" />
 
                     <brushes:AcrylicBrush x:Key="DarkBackgroundBrush"
-                                          BackgroundSource="Backdrop"
                                           BlurAmount="16"
                                           TintColor="White"
                                           TintOpacity="0.3" />
 
 
                     <brushes:AcrylicBrush x:Key="DarkBorderBrush"
-                                          BackgroundSource="Backdrop"
                                           BlurAmount="16"
                                           TintColor="Black"
                                           TintOpacity="0.5" />
 
                     <brushes:AcrylicBrush x:Key="LightBorderBrush"
-                                          BackgroundSource="Backdrop"
                                           BlurAmount="16"
                                           TintColor="White"
                                           TintOpacity="0.1" />

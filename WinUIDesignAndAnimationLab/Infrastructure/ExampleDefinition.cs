@@ -65,7 +65,7 @@ namespace WinUIDesignAndAnimationLab
           new ExampleDefinition("Walking Cat", typeof(WalkingCat)),
           new ExampleDefinition("Transparent Cube", typeof(TransparentCube)),
           //new ExampleDefinition("Acrylic and Blur", typeof(AcrylicAndBlurDemo)),
-          //  new ExampleDefinition("Control Center", typeof(ControlCenterDemo)),
+            new ExampleDefinition("Control Center", typeof(ControlCenterDemo)),
                new ExampleDefinition("Galaxy Shuttle", typeof(GalaxyShuttleDemo)),
             //// Visual demos.
             //new ExampleDefinition("Burning Text", typeof(BurningTextExample)),

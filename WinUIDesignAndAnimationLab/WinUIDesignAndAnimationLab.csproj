@@ -15,28 +15,24 @@
   <ItemGroup>
     <Compile Remove="Demos\AcrylicAndBlur\**" />
     <Compile Remove="Demos\BubbleButton\**" />
-    <Compile Remove="Demos\ControlCenter\**" />
     <Compile Remove="Demos\GooeyButtonDemo\**" />
     <Compile Remove="Demos\LiquidFill\**" />
     <Compile Remove="Demos\PopupUserControl\**" />
     <Compile Remove="Demos\ThreeActionsWithOneClick\**" />
     <EmbeddedResource Remove="Demos\AcrylicAndBlur\**" />
     <EmbeddedResource Remove="Demos\BubbleButton\**" />
-    <EmbeddedResource Remove="Demos\ControlCenter\**" />
     <EmbeddedResource Remove="Demos\GooeyButtonDemo\**" />
     <EmbeddedResource Remove="Demos\LiquidFill\**" />
     <EmbeddedResource Remove="Demos\PopupUserControl\**" />
     <EmbeddedResource Remove="Demos\ThreeActionsWithOneClick\**" />
     <None Remove="Demos\AcrylicAndBlur\**" />
     <None Remove="Demos\BubbleButton\**" />
-    <None Remove="Demos\ControlCenter\**" />
     <None Remove="Demos\GooeyButtonDemo\**" />
     <None Remove="Demos\LiquidFill\**" />
     <None Remove="Demos\PopupUserControl\**" />
     <None Remove="Demos\ThreeActionsWithOneClick\**" />
     <Page Remove="Demos\AcrylicAndBlur\**" />
     <Page Remove="Demos\BubbleButton\**" />
-    <Page Remove="Demos\ControlCenter\**" />
     <Page Remove="Demos\GooeyButtonDemo\**" />
     <Page Remove="Demos\LiquidFill\**" />
     <Page Remove="Demos\PopupUserControl\**" />
@@ -155,9 +151,6 @@
     <Page Update="MainPage.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>
-  </ItemGroup>
-  <ItemGroup>
-    <PRIResource Remove="Demos\ControlCenter\**" />
   </ItemGroup>
   <ItemGroup>
     <Page Update="Demos\Gooey\GooeyFooter2.xaml">
