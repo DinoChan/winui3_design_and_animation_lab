@@ -3,31 +3,81 @@ using Microsoft.Graphics.Canvas.Effects;
 using Microsoft.Graphics.Canvas.Geometry;
 using Microsoft.Graphics.Canvas.Text;
 using Microsoft.Graphics.Canvas.UI.Composition;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Numerics;
-using System.Text;
-using System.Threading.Tasks;
 using Microsoft.Graphics.DirectX;
 using Microsoft.UI;
 using Microsoft.UI.Composition;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Media;
+using System.Numerics;
 using Windows.UI;
 
 namespace WinUIDesignAndAnimationLab.Demos.GlitchArtDemo
 {
     public class TextToBrushWrapper : Control
     {
-        private Compositor Compositor => MainWindow.CurrentWindow.Compositor;
+        /// <summary>
+        /// 标识 StrokeStyle 依赖属性。
+        /// </summary>
+        public static readonly DependencyProperty DashStyleProperty =
+            DependencyProperty.Register(nameof(DashStyle), typeof(CanvasDashStyle), typeof(TextToBrushWrapper), new PropertyMetadata(default(CanvasDashStyle), OnDashStyleChanged));
 
-        protected CompositionDrawingSurface DrawingSurface { get; private set; }
+        /// <summary>
+        /// 标识 FontColor 依赖属性。
+        /// </summary>
+        public static readonly DependencyProperty FontColorProperty =
+            DependencyProperty.Register(nameof(FontColor), typeof(Color), typeof(TextToBrushWrapper), new PropertyMetadata(Colors.Black, OnFontColorChanged));
+
+        /// <summary>
+        /// 标识 OutlineColor 依赖属性。
+        /// </summary>
+        public static readonly DependencyProperty OutlineColorProperty =
+            DependencyProperty.Register(nameof(OutlineColor), typeof(Color), typeof(TextToBrushWrapper), new PropertyMetadata(Colors.Black, OnOutlineColorChanged));
+
+        /// <summary>
+        /// 标识 BlurAmount 依赖属性。
+        /// </summary>
+        public static readonly DependencyProperty ShadowBlurAmountProperty =
+            DependencyProperty.Register(nameof(ShadowBlurAmount), typeof(double), typeof(TextToBrushWrapper), new PropertyMetadata(10d, OnShadowBlurAmountChanged));
+
+        /// <summary>
+        /// 标识 ShadowColor 依赖属性。
+        /// </summary>
+        public static readonly DependencyProperty ShadowColorProperty =
+            DependencyProperty.Register(nameof(ShadowColor), typeof(Color), typeof(TextToBrushWrapper), new PropertyMetadata(Colors.Black, OnShadowColorChanged));
+
+        /// <summary>
+        /// 标识 ShadowOffsetX 依赖属性。
+        /// </summary>
+        public static readonly DependencyProperty ShadowOffsetXProperty =
+            DependencyProperty.Register(nameof(ShadowOffsetX), typeof(double), typeof(TextToBrushWrapper), new PropertyMetadata(default(double), OnShadowOffsetXChanged));
+
+        /// <summary>
+        /// 标识 ShadowOffsetY 依赖属性。
+        /// </summary>
+        public static readonly DependencyProperty ShadowOffsetYProperty =
+            DependencyProperty.Register(nameof(ShadowOffsetY), typeof(double), typeof(TextToBrushWrapper), new PropertyMetadata(default(double), OnShadowOffsetYChanged));
+
+        /// <summary>
+        /// 标识 ShowNonOutlineText 依赖属性。
+        /// </summary>
+        public static readonly DependencyProperty ShowNonOutlineTextProperty =
+            DependencyProperty.Register(nameof(ShowNonOutlineText), typeof(bool), typeof(TextToBrushWrapper), new PropertyMetadata(true, OnShowNonOutlineTextChanged));
+
+        /// <summary>
+        /// 标识 StrokeWidth 依赖属性。
+        /// </summary>
+        public static readonly DependencyProperty StrokeWidthProperty =
+            DependencyProperty.Register(nameof(StrokeWidth), typeof(double), typeof(TextToBrushWrapper), new PropertyMetadata(default(double), OnStrokeWidthChanged));
+
+        /// <summary>
+        /// 标识 Text 依赖属性。
+        /// </summary>
+        public static readonly DependencyProperty TextProperty =
+            DependencyProperty.Register(nameof(Text), typeof(string), typeof(TextToBrushWrapper), new PropertyMetadata(default(string), OnTextChanged));
+
         private CompositionGraphicsDevice _graphicsDevice;
         private SpriteVisual _spriteTextVisual;
-
-        public CompositionSurfaceBrush Brush { get; private set; }
 
         public TextToBrushWrapper()
         {
@@ -62,119 +112,7 @@ namespace WinUIDesignAndAnimationLab.Demos.GlitchArtDemo
             }));
         }
 
-
-        /// <summary>
-        /// 获取或设置OutlineColor的值
-        /// </summary>
-        public Color OutlineColor
-        {
-            get => (Color)GetValue(OutlineColorProperty);
-            set => SetValue(OutlineColorProperty, value);
-        }
-
-        /// <summary>
-        /// 标识 OutlineColor 依赖属性。
-        /// </summary>
-        public static readonly DependencyProperty OutlineColorProperty =
-            DependencyProperty.Register(nameof(OutlineColor), typeof(Color), typeof(TextToBrushWrapper), new PropertyMetadata(Colors.Black, OnOutlineColorChanged));
-
-        private static void OnOutlineColorChanged(DependencyObject obj, DependencyPropertyChangedEventArgs args)
-        {
-            var oldValue = (Color)args.OldValue;
-            var newValue = (Color)args.NewValue;
-            if (oldValue == newValue)
-                return;
-
-            var target = obj as TextToBrushWrapper;
-            target?.OnOutlineColorChanged(oldValue, newValue);
-        }
-
-        /// <summary>
-        /// OutlineColor 属性更改时调用此方法。
-        /// </summary>
-        /// <param name="oldValue">OutlineColor 属性的旧值。</param>
-        /// <param name="newValue">OutlineColor 属性的新值。</param>
-        protected virtual void OnOutlineColorChanged(Color oldValue, Color newValue)
-        {
-            DrawSurface();
-        }
-
-
-
-        /// <summary>
-        /// 获取或设置FontColor的值
-        /// </summary>
-        public Color FontColor
-        {
-            get => (Color)GetValue(FontColorProperty);
-            set => SetValue(FontColorProperty, value);
-        }
-
-        /// <summary>
-        /// 标识 FontColor 依赖属性。
-        /// </summary>
-        public static readonly DependencyProperty FontColorProperty =
-            DependencyProperty.Register(nameof(FontColor), typeof(Color), typeof(TextToBrushWrapper), new PropertyMetadata(Colors.Black, OnFontColorChanged));
-
-        private static void OnFontColorChanged(DependencyObject obj, DependencyPropertyChangedEventArgs args)
-        {
-            var oldValue = (Color)args.OldValue;
-            var newValue = (Color)args.NewValue;
-            if (oldValue == newValue)
-                return;
-
-            var target = obj as TextToBrushWrapper;
-            target?.OnFontColorChanged(oldValue, newValue);
-        }
-
-        /// <summary>
-        /// FontColor 属性更改时调用此方法。
-        /// </summary>
-        /// <param name="oldValue">FontColor 属性的旧值。</param>
-        /// <param name="newValue">FontColor 属性的新值。</param>
-        protected virtual void OnFontColorChanged(Color oldValue, Color newValue)
-        {
-            DrawSurface();
-        }
-
-
-        /// <summary>
-        /// 获取或设置Text的值
-        /// </summary>
-        public string Text
-        {
-            get => (string)GetValue(TextProperty);
-            set => SetValue(TextProperty, value);
-        }
-
-        /// <summary>
-        /// 标识 Text 依赖属性。
-        /// </summary>
-        public static readonly DependencyProperty TextProperty =
-            DependencyProperty.Register(nameof(Text), typeof(string), typeof(TextToBrushWrapper), new PropertyMetadata(default(string), OnTextChanged));
-
-        private static void OnTextChanged(DependencyObject obj, DependencyPropertyChangedEventArgs args)
-        {
-            var oldValue = (string)args.OldValue;
-            var newValue = (string)args.NewValue;
-            if (oldValue == newValue)
-                return;
-
-            var target = obj as TextToBrushWrapper;
-            target?.OnTextChanged(oldValue, newValue);
-        }
-
-        /// <summary>
-        /// Text 属性更改时调用此方法。
-        /// </summary>
-        /// <param name="oldValue">Text 属性的旧值。</param>
-        /// <param name="newValue">Text 属性的新值。</param>
-        protected virtual void OnTextChanged(string oldValue, string newValue)
-        {
-            DrawSurface();
-        }
-
-
+        public CompositionSurfaceBrush Brush { get; private set; }
 
         /// <summary>
         /// 获取或设置StrokeStyle的值
@@ -186,33 +124,58 @@ namespace WinUIDesignAndAnimationLab.Demos.GlitchArtDemo
         }
 
         /// <summary>
-        /// 标识 StrokeStyle 依赖属性。
+        /// 获取或设置FontColor的值
         /// </summary>
-        public static readonly DependencyProperty DashStyleProperty =
-            DependencyProperty.Register(nameof(DashStyle), typeof(CanvasDashStyle), typeof(TextToBrushWrapper), new PropertyMetadata(default(CanvasDashStyle), OnDashStyleChanged));
-
-        private static void OnDashStyleChanged(DependencyObject obj, DependencyPropertyChangedEventArgs args)
+        public Color FontColor
         {
-            var oldValue = (CanvasDashStyle)args.OldValue;
-            var newValue = (CanvasDashStyle)args.NewValue;
-            if (oldValue == newValue)
-                return;
-
-            var target = obj as TextToBrushWrapper;
-            target?.OnDashStyleChanged(oldValue, newValue);
+            get => (Color)GetValue(FontColorProperty);
+            set => SetValue(FontColorProperty, value);
         }
 
         /// <summary>
-        /// StrokeStyle 属性更改时调用此方法。
+        /// 获取或设置OutlineColor的值
         /// </summary>
-        /// <param name="oldValue">StrokeStyle 属性的旧值。</param>
-        /// <param name="newValue">StrokeStyle 属性的新值。</param>
-        protected virtual void OnDashStyleChanged(CanvasDashStyle oldValue, CanvasDashStyle newValue)
+        public Color OutlineColor
         {
-            DrawSurface();
+            get => (Color)GetValue(OutlineColorProperty);
+            set => SetValue(OutlineColorProperty, value);
         }
 
+        /// <summary>
+        /// 获取或设置BlurAmount的值
+        /// </summary>
+        public double ShadowBlurAmount
+        {
+            get => (double)GetValue(ShadowBlurAmountProperty);
+            set => SetValue(ShadowBlurAmountProperty, value);
+        }
 
+        /// <summary>
+        /// 获取或设置ShadowColor的值
+        /// </summary>
+        public Color ShadowColor
+        {
+            get => (Color)GetValue(ShadowColorProperty);
+            set => SetValue(ShadowColorProperty, value);
+        }
+
+        /// <summary>
+        /// 获取或设置ShadowOffsetX的值
+        /// </summary>
+        public double ShadowOffsetX
+        {
+            get => (double)GetValue(ShadowOffsetXProperty);
+            set => SetValue(ShadowOffsetXProperty, value);
+        }
+
+        /// <summary>
+        /// 获取或设置ShadowOffsetY的值
+        /// </summary>
+        public double ShadowOffsetY
+        {
+            get => (double)GetValue(ShadowOffsetYProperty);
+            set => SetValue(ShadowOffsetYProperty, value);
+        }
 
         /// <summary>
         /// 获取或设置ShowNonOutlineText的值
@@ -224,34 +187,6 @@ namespace WinUIDesignAndAnimationLab.Demos.GlitchArtDemo
         }
 
         /// <summary>
-        /// 标识 ShowNonOutlineText 依赖属性。
-        /// </summary>
-        public static readonly DependencyProperty ShowNonOutlineTextProperty =
-            DependencyProperty.Register(nameof(ShowNonOutlineText), typeof(bool), typeof(TextToBrushWrapper), new PropertyMetadata(true, OnShowNonOutlineTextChanged));
-
-        private static void OnShowNonOutlineTextChanged(DependencyObject obj, DependencyPropertyChangedEventArgs args)
-        {
-            var oldValue = (bool)args.OldValue;
-            var newValue = (bool)args.NewValue;
-            if (oldValue == newValue)
-                return;
-
-            var target = obj as TextToBrushWrapper;
-            target?.OnShowNonOutlineTextChanged(oldValue, newValue);
-        }
-
-        /// <summary>
-        /// ShowNonOutlineText 属性更改时调用此方法。
-        /// </summary>
-        /// <param name="oldValue">ShowNonOutlineText 属性的旧值。</param>
-        /// <param name="newValue">ShowNonOutlineText 属性的新值。</param>
-        protected virtual void OnShowNonOutlineTextChanged(bool oldValue, bool newValue)
-        {
-            DrawSurface();
-        }
-
-
-        /// <summary>
         /// 获取或设置StrokeWidth的值
         /// </summary>
         public double StrokeWidth
@@ -261,31 +196,16 @@ namespace WinUIDesignAndAnimationLab.Demos.GlitchArtDemo
         }
 
         /// <summary>
-        /// 标识 StrokeWidth 依赖属性。
+        /// 获取或设置Text的值
         /// </summary>
-        public static readonly DependencyProperty StrokeWidthProperty =
-            DependencyProperty.Register(nameof(StrokeWidth), typeof(double), typeof(TextToBrushWrapper), new PropertyMetadata(default(double), OnStrokeWidthChanged));
-
-        private static void OnStrokeWidthChanged(DependencyObject obj, DependencyPropertyChangedEventArgs args)
+        public string Text
         {
-            var oldValue = (double)args.OldValue;
-            var newValue = (double)args.NewValue;
-            if (oldValue == newValue)
-                return;
-
-            var target = obj as TextToBrushWrapper;
-            target?.OnStrokeWidthChanged(oldValue, newValue);
+            get => (string)GetValue(TextProperty);
+            set => SetValue(TextProperty, value);
         }
 
-        /// <summary>
-        /// StrokeWidth 属性更改时调用此方法。
-        /// </summary>
-        /// <param name="oldValue">StrokeWidth 属性的旧值。</param>
-        /// <param name="newValue">StrokeWidth 属性的新值。</param>
-        protected virtual void OnStrokeWidthChanged(double oldValue, double newValue)
-        {
-            DrawSurface();
-        }
+        protected CompositionDrawingSurface DrawingSurface { get; private set; }
+        private Compositor Compositor => MainWindow.CurrentWindow.Compositor;
 
         protected void DrawSurface()
         {
@@ -305,7 +225,6 @@ namespace WinUIDesignAndAnimationLab.Demos.GlitchArtDemo
                 session.Clear(Colors.Transparent);
                 if (Background is SolidColorBrush solidColorBrush)
                     session.FillRectangle(new Windows.Foundation.Rect(0, 0, width, height), solidColorBrush.Color);
-
 
                 using (var textFormat = new CanvasTextFormat()
                 {
@@ -347,7 +266,6 @@ namespace WinUIDesignAndAnimationLab.Demos.GlitchArtDemo
             }
         }
 
-
         protected void DrawText(CanvasDrawingSession session, CanvasTextLayout textLayout, Color color)
         {
             if (ShowNonOutlineText)
@@ -364,29 +282,33 @@ namespace WinUIDesignAndAnimationLab.Demos.GlitchArtDemo
         }
 
         /// <summary>
-        /// 获取或设置BlurAmount的值
+        /// StrokeStyle 属性更改时调用此方法。
         /// </summary>
-        public double ShadowBlurAmount
+        /// <param name="oldValue">StrokeStyle 属性的旧值。</param>
+        /// <param name="newValue">StrokeStyle 属性的新值。</param>
+        protected virtual void OnDashStyleChanged(CanvasDashStyle oldValue, CanvasDashStyle newValue)
         {
-            get => (double)GetValue(ShadowBlurAmountProperty);
-            set => SetValue(ShadowBlurAmountProperty, value);
+            DrawSurface();
         }
 
         /// <summary>
-        /// 标识 BlurAmount 依赖属性。
+        /// FontColor 属性更改时调用此方法。
         /// </summary>
-        public static readonly DependencyProperty ShadowBlurAmountProperty =
-            DependencyProperty.Register(nameof(ShadowBlurAmount), typeof(double), typeof(TextToBrushWrapper), new PropertyMetadata(10d, OnShadowBlurAmountChanged));
-
-        private static void OnShadowBlurAmountChanged(DependencyObject obj, DependencyPropertyChangedEventArgs args)
+        /// <param name="oldValue">FontColor 属性的旧值。</param>
+        /// <param name="newValue">FontColor 属性的新值。</param>
+        protected virtual void OnFontColorChanged(Color oldValue, Color newValue)
         {
-            var oldValue = (double)args.OldValue;
-            var newValue = (double)args.NewValue;
-            if (oldValue == newValue)
-                return;
+            DrawSurface();
+        }
 
-            var target = obj as TextToBrushWrapper;
-            target?.OnShadowBlurAmountChanged(oldValue, newValue);
+        /// <summary>
+        /// OutlineColor 属性更改时调用此方法。
+        /// </summary>
+        /// <param name="oldValue">OutlineColor 属性的旧值。</param>
+        /// <param name="newValue">OutlineColor 属性的新值。</param>
+        protected virtual void OnOutlineColorChanged(Color oldValue, Color newValue)
+        {
+            DrawSurface();
         }
 
         /// <summary>
@@ -399,31 +321,14 @@ namespace WinUIDesignAndAnimationLab.Demos.GlitchArtDemo
             DrawSurface();
         }
 
-
         /// <summary>
-        /// 获取或设置ShadowOffsetX的值
+        /// ShadowColor 属性更改时调用此方法。
         /// </summary>
-        public double ShadowOffsetX
+        /// <param name="oldValue">ShadowColor 属性的旧值。</param>
+        /// <param name="newValue">ShadowColor 属性的新值。</param>
+        protected virtual void OnShadowColorChanged(Color oldValue, Color newValue)
         {
-            get => (double)GetValue(ShadowOffsetXProperty);
-            set => SetValue(ShadowOffsetXProperty, value);
-        }
-
-        /// <summary>
-        /// 标识 ShadowOffsetX 依赖属性。
-        /// </summary>
-        public static readonly DependencyProperty ShadowOffsetXProperty =
-            DependencyProperty.Register(nameof(ShadowOffsetX), typeof(double), typeof(TextToBrushWrapper), new PropertyMetadata(default(double), OnShadowOffsetXChanged));
-
-        private static void OnShadowOffsetXChanged(DependencyObject obj, DependencyPropertyChangedEventArgs args)
-        {
-            var oldValue = (double)args.OldValue;
-            var newValue = (double)args.NewValue;
-            if (oldValue == newValue)
-                return;
-
-            var target = obj as TextToBrushWrapper;
-            target?.OnShadowOffsetXChanged(oldValue, newValue);
+            DrawSurface();
         }
 
         /// <summary>
@@ -436,33 +341,6 @@ namespace WinUIDesignAndAnimationLab.Demos.GlitchArtDemo
             DrawSurface();
         }
 
-
-        /// <summary>
-        /// 获取或设置ShadowOffsetY的值
-        /// </summary>
-        public double ShadowOffsetY
-        {
-            get => (double)GetValue(ShadowOffsetYProperty);
-            set => SetValue(ShadowOffsetYProperty, value);
-        }
-
-        /// <summary>
-        /// 标识 ShadowOffsetY 依赖属性。
-        /// </summary>
-        public static readonly DependencyProperty ShadowOffsetYProperty =
-            DependencyProperty.Register(nameof(ShadowOffsetY), typeof(double), typeof(TextToBrushWrapper), new PropertyMetadata(default(double), OnShadowOffsetYChanged));
-
-        private static void OnShadowOffsetYChanged(DependencyObject obj, DependencyPropertyChangedEventArgs args)
-        {
-            var oldValue = (double)args.OldValue;
-            var newValue = (double)args.NewValue;
-            if (oldValue == newValue)
-                return;
-
-            var target = obj as TextToBrushWrapper;
-            target?.OnShadowOffsetYChanged(oldValue, newValue);
-        }
-
         /// <summary>
         /// ShadowOffsetY 属性更改时调用此方法。
         /// </summary>
@@ -473,21 +351,79 @@ namespace WinUIDesignAndAnimationLab.Demos.GlitchArtDemo
             DrawSurface();
         }
 
-
         /// <summary>
-        /// 获取或设置ShadowColor的值
+        /// ShowNonOutlineText 属性更改时调用此方法。
         /// </summary>
-        public Color ShadowColor
+        /// <param name="oldValue">ShowNonOutlineText 属性的旧值。</param>
+        /// <param name="newValue">ShowNonOutlineText 属性的新值。</param>
+        protected virtual void OnShowNonOutlineTextChanged(bool oldValue, bool newValue)
         {
-            get => (Color)GetValue(ShadowColorProperty);
-            set => SetValue(ShadowColorProperty, value);
+            DrawSurface();
         }
 
         /// <summary>
-        /// 标识 ShadowColor 依赖属性。
+        /// StrokeWidth 属性更改时调用此方法。
         /// </summary>
-        public static readonly DependencyProperty ShadowColorProperty =
-            DependencyProperty.Register(nameof(ShadowColor), typeof(Color), typeof(TextToBrushWrapper), new PropertyMetadata(Colors.Black, OnShadowColorChanged));
+        /// <param name="oldValue">StrokeWidth 属性的旧值。</param>
+        /// <param name="newValue">StrokeWidth 属性的新值。</param>
+        protected virtual void OnStrokeWidthChanged(double oldValue, double newValue)
+        {
+            DrawSurface();
+        }
+
+        /// <summary>
+        /// Text 属性更改时调用此方法。
+        /// </summary>
+        /// <param name="oldValue">Text 属性的旧值。</param>
+        /// <param name="newValue">Text 属性的新值。</param>
+        protected virtual void OnTextChanged(string oldValue, string newValue)
+        {
+            DrawSurface();
+        }
+
+        private static void OnDashStyleChanged(DependencyObject obj, DependencyPropertyChangedEventArgs args)
+        {
+            var oldValue = (CanvasDashStyle)args.OldValue;
+            var newValue = (CanvasDashStyle)args.NewValue;
+            if (oldValue == newValue)
+                return;
+
+            var target = obj as TextToBrushWrapper;
+            target?.OnDashStyleChanged(oldValue, newValue);
+        }
+
+        private static void OnFontColorChanged(DependencyObject obj, DependencyPropertyChangedEventArgs args)
+        {
+            var oldValue = (Color)args.OldValue;
+            var newValue = (Color)args.NewValue;
+            if (oldValue == newValue)
+                return;
+
+            var target = obj as TextToBrushWrapper;
+            target?.OnFontColorChanged(oldValue, newValue);
+        }
+
+        private static void OnOutlineColorChanged(DependencyObject obj, DependencyPropertyChangedEventArgs args)
+        {
+            var oldValue = (Color)args.OldValue;
+            var newValue = (Color)args.NewValue;
+            if (oldValue == newValue)
+                return;
+
+            var target = obj as TextToBrushWrapper;
+            target?.OnOutlineColorChanged(oldValue, newValue);
+        }
+
+        private static void OnShadowBlurAmountChanged(DependencyObject obj, DependencyPropertyChangedEventArgs args)
+        {
+            var oldValue = (double)args.OldValue;
+            var newValue = (double)args.NewValue;
+            if (oldValue == newValue)
+                return;
+
+            var target = obj as TextToBrushWrapper;
+            target?.OnShadowBlurAmountChanged(oldValue, newValue);
+        }
 
         private static void OnShadowColorChanged(DependencyObject obj, DependencyPropertyChangedEventArgs args)
         {
@@ -500,14 +436,59 @@ namespace WinUIDesignAndAnimationLab.Demos.GlitchArtDemo
             target?.OnShadowColorChanged(oldValue, newValue);
         }
 
-        /// <summary>
-        /// ShadowColor 属性更改时调用此方法。
-        /// </summary>
-        /// <param name="oldValue">ShadowColor 属性的旧值。</param>
-        /// <param name="newValue">ShadowColor 属性的新值。</param>
-        protected virtual void OnShadowColorChanged(Color oldValue, Color newValue)
+        private static void OnShadowOffsetXChanged(DependencyObject obj, DependencyPropertyChangedEventArgs args)
         {
-            DrawSurface();
+            var oldValue = (double)args.OldValue;
+            var newValue = (double)args.NewValue;
+            if (oldValue == newValue)
+                return;
+
+            var target = obj as TextToBrushWrapper;
+            target?.OnShadowOffsetXChanged(oldValue, newValue);
+        }
+
+        private static void OnShadowOffsetYChanged(DependencyObject obj, DependencyPropertyChangedEventArgs args)
+        {
+            var oldValue = (double)args.OldValue;
+            var newValue = (double)args.NewValue;
+            if (oldValue == newValue)
+                return;
+
+            var target = obj as TextToBrushWrapper;
+            target?.OnShadowOffsetYChanged(oldValue, newValue);
+        }
+
+        private static void OnShowNonOutlineTextChanged(DependencyObject obj, DependencyPropertyChangedEventArgs args)
+        {
+            var oldValue = (bool)args.OldValue;
+            var newValue = (bool)args.NewValue;
+            if (oldValue == newValue)
+                return;
+
+            var target = obj as TextToBrushWrapper;
+            target?.OnShowNonOutlineTextChanged(oldValue, newValue);
+        }
+
+        private static void OnStrokeWidthChanged(DependencyObject obj, DependencyPropertyChangedEventArgs args)
+        {
+            var oldValue = (double)args.OldValue;
+            var newValue = (double)args.NewValue;
+            if (oldValue == newValue)
+                return;
+
+            var target = obj as TextToBrushWrapper;
+            target?.OnStrokeWidthChanged(oldValue, newValue);
+        }
+
+        private static void OnTextChanged(DependencyObject obj, DependencyPropertyChangedEventArgs args)
+        {
+            var oldValue = (string)args.OldValue;
+            var newValue = (string)args.NewValue;
+            if (oldValue == newValue)
+                return;
+
+            var target = obj as TextToBrushWrapper;
+            target?.OnTextChanged(oldValue, newValue);
         }
     }
 }

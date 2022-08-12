@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using WinUIDesignAndAnimationLab.Demos;
 using WinUIDesignAndAnimationLab.Demos.GalaxyShuttles;
 using WinUIDesignAndAnimationLab.Demos.GlitchArtDemo;
@@ -24,22 +20,16 @@ namespace WinUIDesignAndAnimationLab
             InspiredBy = inspiredBy;
         }
 
-        public string Name { get; private set; }
         public Type Control { get; private set; }
-
         public Uri InspiredBy { get; private set; }
+        public string Name { get; private set; }
 
-        public override string ToString()
-        {
-            return this.Name;
-        }
-
-        public string ThumbnailWide
+        public string ThumbnailNarrow
         {
             get { return "ms-appx:///Thumbnails/" + ThumbnailFilename(""); }
         }
 
-        public string ThumbnailNarrow
+        public string ThumbnailWide
         {
             get { return "ms-appx:///Thumbnails/" + ThumbnailFilename(""); }
         }
@@ -48,8 +38,12 @@ namespace WinUIDesignAndAnimationLab
         {
             return Name.Replace(" ", "") + suffix + ".png";
         }
-    }
 
+        public override string ToString()
+        {
+            return this.Name;
+        }
+    }
 
     public class ExampleDefinitions
     {

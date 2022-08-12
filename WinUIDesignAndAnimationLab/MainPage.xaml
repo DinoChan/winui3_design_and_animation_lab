@@ -1,19 +1,17 @@
-﻿<Page
-    x:Class="WinUIDesignAndAnimationLab.MainPage"
-    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:local="using:WinUIDesignAndAnimationLab"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    Background="{ThemeResource SystemControlChromeMediumLowAcrylicWindowMediumBrush}"
-    mc:Ignorable="d">
+﻿<Page x:Class="WinUIDesignAndAnimationLab.MainPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:local="using:WinUIDesignAndAnimationLab"
+      Background="{ThemeResource SystemControlChromeMediumLowAcrylicWindowMediumBrush}"
+      mc:Ignorable="d">
 
     <Page.Resources>
 
-        <Style
-            x:Key="ExampleListTextBlockStyle"
-            BasedOn="{StaticResource TitleTextBlockStyle}"
-            TargetType="TextBlock">
+        <Style x:Key="ExampleListTextBlockStyle"
+               BasedOn="{StaticResource TitleTextBlockStyle}"
+               TargetType="TextBlock">
             <Setter Property="VerticalAlignment" Value="Bottom" />
             <Setter Property="TextWrapping" Value="Wrap" />
             <Setter Property="Foreground" Value="White" />
@@ -25,50 +23,44 @@
             <StackPanel Width="300" Margin="10">
                 <Image>
                     <Image.Source>
-                        <BitmapImage
-                            DecodePixelHeight="150"
-                            DecodePixelWidth="300"
-                            UriSource="{Binding ThumbnailWide}" />
+                        <BitmapImage DecodePixelHeight="150"
+                                     DecodePixelWidth="300"
+                                     UriSource="{Binding ThumbnailWide}" />
                     </Image.Source>
                 </Image>
-                <TextBlock
-                    Margin="20"
-                    HorizontalAlignment="Center"
-                    Style="{StaticResource ExampleListTextBlockStyle}"
-                    Text="{Binding Name}" />
+                <TextBlock Margin="20"
+                           HorizontalAlignment="Center"
+                           Style="{StaticResource ExampleListTextBlockStyle}"
+                           Text="{Binding Name}" />
             </StackPanel>
         </DataTemplate>
-
     </Page.Resources>
 
-    <ScrollViewer
-        x:Name="scrollViewer"
-        Background="Transparent"
-        VerticalScrollMode="Enabled">
+    <ScrollViewer x:Name="scrollViewer"
+                  Background="Transparent"
+                  VerticalScrollMode="Enabled">
 
         <Grid Margin="10">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
-            <TextBlock
-                x:Name="textBlock"
-                Grid.Row="0"
-                Margin="10,10,0,10"
-                FontFamily="Global User Interface"
-                Style="{StaticResource HeaderTextBlockStyle}"
-                TextWrapping="WrapWholeWords">
+            <TextBlock x:Name="textBlock"
+                       Grid.Row="0"
+                       Margin="10,10,0,10"
+                       FontFamily="Global User Interface"
+                       Style="{StaticResource HeaderTextBlockStyle}"
+                       TextWrapping="WrapWholeWords">
                 Design And Animation Lab
             </TextBlock>
-            <GridView
-                x:Name="gridView"
-                Grid.Row="1"
-                VerticalContentAlignment="Top"
-                IsItemClickEnabled="True"
-                ItemClick="GridView_ItemClick"
-                ItemTemplate="{StaticResource ItemTemplate}"
-                ItemsSource="{Binding Definitions}"
-                SelectionMode="None">
+            <GridView x:Name="gridView"
+                      Grid.Row="1"
+                      VerticalContentAlignment="Top"
+                      IsItemClickEnabled="True"
+                      ItemClick="GridView_ItemClick"
+                      ItemTemplate="{StaticResource ItemTemplate}"
+                      ItemsSource="{Binding Definitions}"
+                      SelectionMode="None">
                 <GridView.ItemContainerTransitions>
                     <TransitionCollection>
                         <EntranceThemeTransition IsStaggeringEnabled="true" />

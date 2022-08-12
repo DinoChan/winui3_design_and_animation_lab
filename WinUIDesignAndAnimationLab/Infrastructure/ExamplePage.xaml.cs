@@ -6,7 +6,6 @@ using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Navigation;
 using System;
-using Windows.UI.Xaml;
 
 namespace WinUIDesignAndAnimationLab
 {
@@ -16,7 +15,7 @@ namespace WinUIDesignAndAnimationLab
 
         public ExamplePage()
         {
-            this.InitializeComponent();         
+            this.InitializeComponent();
 
             this.navigationHelper = new NavigationHelper(this);
 
@@ -36,8 +35,13 @@ namespace WinUIDesignAndAnimationLab
             get { return this.navigationHelper; }
         }
 
+        protected override void OnNavigatedFrom(NavigationEventArgs e)
+        {
+            this.navigationHelper.OnNavigatedFrom(e);
+        }
+
         protected override void OnNavigatedTo(NavigationEventArgs e)
-        {            
+        {
             this.navigationHelper.OnNavigatedTo(e);
 
             var example = e.Parameter as ExampleDefinition;
@@ -49,13 +53,8 @@ namespace WinUIDesignAndAnimationLab
                     var control = Activator.CreateInstance(example.Control) as FrameworkElement;
                     this.RequestedTheme = control.RequestedTheme;
                     this.exampleContent.Children.Add(control);
-                }                
+                }
             }
-        }
-
-        protected override void OnNavigatedFrom(NavigationEventArgs e)
-        {
-            this.navigationHelper.OnNavigatedFrom(e);
         }
     }
 }

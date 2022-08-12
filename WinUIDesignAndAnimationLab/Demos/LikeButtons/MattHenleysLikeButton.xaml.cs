@@ -1,8 +1,8 @@
-﻿using System;
-using Microsoft.UI.Xaml;
+﻿using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Media.Animation;
+using System;
 
 //https://go.microsoft.com/fwlink/?LinkId=234236 上介绍了“用户控件”项模板
 
@@ -21,11 +21,15 @@ namespace WinUIDesignAndAnimationLab.Demos.LikeButtons
             InitializeComponent();
         }
 
+        private void OnChecked(object sender, RoutedEventArgs e)
+        {
+            _checkStoryboard.Begin();
+        }
+
         private void OnHeartLoaded(object sender, RoutedEventArgs e)
         {
             _heartTransform = (sender as Image).RenderTransform as CompositeTransform;
             _checkStoryboard = new Storyboard();
-
 
             var keyFrames = new DoubleAnimationUsingKeyFrames();
             Storyboard.SetTarget(keyFrames, _heartTransform);
@@ -44,11 +48,6 @@ namespace WinUIDesignAndAnimationLab.Demos.LikeButtons
             _checkStoryboard.Children.Add(keyFrames);
 
             _checkStoryboard.FillBehavior = FillBehavior.HoldEnd;
-        }
-
-        private void OnChecked(object sender, RoutedEventArgs e)
-        {
-            _checkStoryboard.Begin();
         }
 
         private void OnUnchecked(object sender, RoutedEventArgs e)

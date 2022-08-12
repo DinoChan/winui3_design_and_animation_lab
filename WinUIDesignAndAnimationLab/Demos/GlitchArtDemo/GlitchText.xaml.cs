@@ -1,24 +1,10 @@
 ﻿using Microsoft.Graphics.Canvas.Effects;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Numerics;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
-using Windows.UI;
-using Microsoft.UI.Composition;
-using Microsoft.UI.Xaml;
-using Microsoft.UI.Xaml.Controls;
-using Microsoft.UI.Xaml.Controls.Primitives;
-using Microsoft.UI.Xaml.Data;
-using Microsoft.UI.Xaml.Hosting;
-using Microsoft.UI.Xaml.Input;
-using Microsoft.UI.Xaml.Media;
-using Microsoft.UI.Xaml.Navigation;
-using Microsoft.UI.Xaml.Shapes;
 using Microsoft.UI;
+using Microsoft.UI.Composition;
+using Microsoft.UI.Xaml.Controls;
+using Microsoft.UI.Xaml.Hosting;
+using System;
+using System.Numerics;
 
 //https://go.microsoft.com/fwlink/?LinkId=234236 上介绍了“用户控件”项模板
 
@@ -26,8 +12,6 @@ namespace WinUIDesignAndAnimationLab.Demos.GlitchArtDemo
 {
     public sealed partial class GlitchText : UserControl
     {
-        private Compositor Compositor => MainWindow.CurrentWindow.Compositor;
-
         public GlitchText()
         {
             this.InitializeComponent();
@@ -57,7 +41,6 @@ namespace WinUIDesignAndAnimationLab.Demos.GlitchArtDemo
             var containerVisual = Compositor.CreateContainerVisual();
             containerVisual.Children.InsertAtBottom(imageVisual);
 
-
             var lineVisual = Compositor.CreateSpriteVisual();
             lineVisual.Brush = Compositor.CreateColorBrush(Colors.Black);
             lineVisual.Size = new Vector2(800, 2);
@@ -72,6 +55,7 @@ namespace WinUIDesignAndAnimationLab.Demos.GlitchArtDemo
               };
         }
 
+        private Compositor Compositor => MainWindow.CurrentWindow.Compositor;
 
         private CompositionBrush CreateBrush(CompositionBrush foreground, CompositionBrush background, BlendEffectMode blendEffectMode)
         {

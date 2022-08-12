@@ -2,7 +2,6 @@
 using Microsoft.UI.Xaml.Media.Animation;
 using System;
 using System.Numerics;
-using Windows.UI.Xaml;
 
 namespace WinUIDesignAndAnimationLab.AnimationTimelines
 {

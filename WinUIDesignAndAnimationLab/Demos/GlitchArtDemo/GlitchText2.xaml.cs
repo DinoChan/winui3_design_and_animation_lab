@@ -1,27 +1,14 @@
 ﻿using Microsoft.Graphics.Canvas.Effects;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Numerics;
-using System.Runtime.InteropServices.WindowsRuntime;
-using System.Threading.Tasks;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
-using Windows.UI;
+using Microsoft.UI;
 using Microsoft.UI.Composition;
-using Windows.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
-using Microsoft.UI.Xaml.Controls.Primitives;
-using Microsoft.UI.Xaml.Data;
 using Microsoft.UI.Xaml.Hosting;
-using Microsoft.UI.Xaml.Input;
 using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Media.Animation;
-using Microsoft.UI.Xaml.Navigation;
-using Microsoft.UI.Xaml.Shapes;
-using Microsoft.UI;
-using Microsoft.UI.Xaml;
+using System;
+using System.Collections.Generic;
+using System.Numerics;
+using Windows.UI;
 
 //https://go.microsoft.com/fwlink/?LinkId=234236 上介绍了“用户控件”项模板
 
@@ -29,9 +16,6 @@ namespace WinUIDesignAndAnimationLab.Demos.GlitchArtDemo
 {
     public sealed partial class GlitchText2 : UserControl
     {
-        private Compositor Compositor => MainWindow.CurrentWindow.Compositor;
-        public string Text { get; }
-
         public GlitchText2()
         {
             this.InitializeComponent();
@@ -70,6 +54,9 @@ namespace WinUIDesignAndAnimationLab.Demos.GlitchArtDemo
              };
         }
 
+        public string Text { get; }
+        private Compositor Compositor => MainWindow.CurrentWindow.Compositor;
+
         public TextToBrushWrapper CreateTextToBrushWrapper(double shadowOffsetX, Color shadowColor)
         {
             var result = new TextToBrushWrapper
@@ -88,8 +75,6 @@ namespace WinUIDesignAndAnimationLab.Demos.GlitchArtDemo
             return result;
         }
 
-
-
         private CompositionBrush CreateBrush(CompositionBrush foreground, CompositionBrush background, BlendEffectMode blendEffectMode)
         {
             var compositor = this.Compositor;
@@ -106,28 +91,6 @@ namespace WinUIDesignAndAnimationLab.Demos.GlitchArtDemo
 
             return compositionBrush;
         }
-
-        private void StartOffsetAnimation(SpriteVisual visual, TimeSpan duration, TimeSpan delay)
-        {
-            var offsetAnimation = Compositor.CreateVector3KeyFrameAnimation();
-            offsetAnimation.Duration = duration;
-            offsetAnimation.DelayTime = delay;
-            offsetAnimation.IterationBehavior = AnimationIterationBehavior.Forever;
-            var easing = Compositor.CreateCubicBezierEasingFunction(new Vector2(0.1f, 0.9f), new Vector2(0.2f, 1f));
-            void addKey(float key, float top)
-            {
-                offsetAnimation.InsertKeyFrame(key, new Vector3(0, top, 0), easing);
-            };
-
-            addKey(.08f, 95);
-            addKey(.14f, 20);
-            addKey(.20f, 105);
-            addKey(.32f, 5);
-            addKey(.99f, 75);
-            visual.StartAnimation(nameof(CompositionSurfaceBrush.Offset), offsetAnimation);
-        }
-
-
 
         private void StartHeightAnimation(TextToBrushWrapper brush, List<(double, double)> keyFrames, TimeSpan duration, TimeSpan delay)
         {
@@ -148,6 +111,26 @@ namespace WinUIDesignAndAnimationLab.Demos.GlitchArtDemo
 
             storyboard.BeginTime = delay;
             storyboard.Begin();
+        }
+
+        private void StartOffsetAnimation(SpriteVisual visual, TimeSpan duration, TimeSpan delay)
+        {
+            var offsetAnimation = Compositor.CreateVector3KeyFrameAnimation();
+            offsetAnimation.Duration = duration;
+            offsetAnimation.DelayTime = delay;
+            offsetAnimation.IterationBehavior = AnimationIterationBehavior.Forever;
+            var easing = Compositor.CreateCubicBezierEasingFunction(new Vector2(0.1f, 0.9f), new Vector2(0.2f, 1f));
+            void addKey(float key, float top)
+            {
+                offsetAnimation.InsertKeyFrame(key, new Vector3(0, top, 0), easing);
+            };
+
+            addKey(.08f, 95);
+            addKey(.14f, 20);
+            addKey(.20f, 105);
+            addKey(.32f, 5);
+            addKey(.99f, 75);
+            visual.StartAnimation(nameof(CompositionSurfaceBrush.Offset), offsetAnimation);
         }
     }
 }

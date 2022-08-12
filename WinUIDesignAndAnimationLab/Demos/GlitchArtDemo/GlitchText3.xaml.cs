@@ -1,29 +1,16 @@
 ﻿using Microsoft.Graphics.Canvas.Effects;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Numerics;
-using System.Runtime.InteropServices.WindowsRuntime;
-using System.Threading.Tasks;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
-using Windows.UI;
 using Microsoft.UI;
 using Microsoft.UI.Composition;
-using Windows.UI.Text;
-using Windows.UI.Xaml;
+using Microsoft.UI.Text;
 using Microsoft.UI.Xaml.Controls;
-using Microsoft.UI.Xaml.Controls.Primitives;
-using Microsoft.UI.Xaml.Data;
 using Microsoft.UI.Xaml.Hosting;
-using Microsoft.UI.Xaml.Input;
 using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Media.Animation;
-using Microsoft.UI.Xaml.Navigation;
-using Microsoft.UI.Xaml.Shapes;
-using Microsoft.UI.Text;
-using Microsoft.UI.Xaml;
+using System;
+using System.Collections.Generic;
+using System.Numerics;
+using System.Threading.Tasks;
+using Windows.UI;
 
 //https://go.microsoft.com/fwlink/?LinkId=234236 上介绍了“用户控件”项模板
 
@@ -31,8 +18,6 @@ namespace WinUIDesignAndAnimationLab.Demos.GlitchArtDemo
 {
     public sealed partial class GlitchText3 : UserControl
     {
-        private Compositor Compositor => MainWindow.CurrentWindow.Compositor;
-        public string Text { get; }
         public GlitchText3()
         {
             this.InitializeComponent();
@@ -49,7 +34,7 @@ namespace WinUIDesignAndAnimationLab.Demos.GlitchArtDemo
             var containerVisual = Compositor.CreateContainerVisual();
             var foregroundVisual = Compositor.CreateSpriteVisual();
 
-            foregroundVisual.Brush =  CreateBrush(blueBrush, redBrush, BlendEffectMode.Multiply);
+            foregroundVisual.Brush = CreateBrush(blueBrush, redBrush, BlendEffectMode.Multiply);
             foregroundVisual.Size = new Vector2(800, 110);
             containerVisual.Children.InsertAtBottom(foregroundVisual);
 
@@ -86,7 +71,8 @@ namespace WinUIDesignAndAnimationLab.Demos.GlitchArtDemo
             };
         }
 
-
+        public string Text { get; }
+        private Compositor Compositor => MainWindow.CurrentWindow.Compositor;
 
         public TextToBrushWrapper CreateTextToBrushWrapper(double shadowOffsetX, Color shadowColor)
         {
@@ -107,8 +93,6 @@ namespace WinUIDesignAndAnimationLab.Demos.GlitchArtDemo
             result.Brush.VerticalAlignmentRatio = 0;
             return result;
         }
-
-
 
         private CompositionBrush CreateBrush(CompositionBrush foreground, CompositionBrush background, BlendEffectMode blendEffectMode)
         {
@@ -147,6 +131,27 @@ namespace WinUIDesignAndAnimationLab.Demos.GlitchArtDemo
             return (compositionBrush, opacityBrush);
         }
 
+        private void StartHeightAnimation(TextToBrushWrapper brush, List<(double, double)> keyFrames, TimeSpan duration, TimeSpan delay)
+        {
+            var storyboard = new Storyboard();
+
+            var animation = new DoubleAnimationUsingKeyFrames();
+            animation.EnableDependentAnimation = true;
+            Storyboard.SetTarget(animation, brush);
+            Storyboard.SetTargetProperty(animation, nameof(TextToBrushWrapper.Height));
+
+            foreach (var item in keyFrames)
+            {
+                animation.KeyFrames.Add(new LinearDoubleKeyFrame { KeyTime = duration / 100 * item.Item1, Value = item.Item2 });
+            }
+
+            storyboard.Children.Add(animation);
+            storyboard.RepeatBehavior = RepeatBehavior.Forever;
+
+            storyboard.BeginTime = delay;
+            storyboard.Begin();
+        }
+
         private void StartOffseteAnimation(SpriteVisual visual, TimeSpan duration, TimeSpan delay)
         {
             var offsetAnimation = Compositor.CreateVector3KeyFrameAnimation();
@@ -181,27 +186,6 @@ namespace WinUIDesignAndAnimationLab.Demos.GlitchArtDemo
             }
 
             brush.StartAnimation(nameof(CompositionSurfaceBrush.Scale), offsetAnimation);
-        }
-
-        private void StartHeightAnimation(TextToBrushWrapper brush, List<(double, double)> keyFrames, TimeSpan duration, TimeSpan delay)
-        {
-            var storyboard = new Storyboard();
-
-            var animation = new DoubleAnimationUsingKeyFrames();
-            animation.EnableDependentAnimation = true;
-            Storyboard.SetTarget(animation, brush);
-            Storyboard.SetTargetProperty(animation, nameof(TextToBrushWrapper.Height));
-
-            foreach (var item in keyFrames)
-            {
-                animation.KeyFrames.Add(new LinearDoubleKeyFrame { KeyTime = duration / 100 * item.Item1, Value = item.Item2 });
-            }
-
-            storyboard.Children.Add(animation);
-            storyboard.RepeatBehavior = RepeatBehavior.Forever;
-
-            storyboard.BeginTime = delay;
-            storyboard.Begin();
         }
     }
 }

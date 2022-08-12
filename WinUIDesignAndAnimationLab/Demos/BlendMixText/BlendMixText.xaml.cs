@@ -1,25 +1,11 @@
-﻿using WinUIDesignAndAnimationLab.Demos.GlitchArtDemo;
-using Microsoft.Graphics.Canvas.Effects;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Numerics;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
+﻿using Microsoft.Graphics.Canvas.Effects;
 using Microsoft.UI;
 using Microsoft.UI.Composition;
-using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
-using Microsoft.UI.Xaml.Controls.Primitives;
-using Microsoft.UI.Xaml.Data;
 using Microsoft.UI.Xaml.Hosting;
-using Microsoft.UI.Xaml.Input;
-using Microsoft.UI.Xaml.Media;
-using Microsoft.UI.Xaml.Navigation;
 using Microsoft.UI.Xaml.Shapes;
-using Microsoft.UI;
+using System.Numerics;
+using WinUIDesignAndAnimationLab.Demos.GlitchArtDemo;
 
 //https://go.microsoft.com/fwlink/?LinkId=234236 上介绍了“用户控件”项模板
 
@@ -27,10 +13,6 @@ namespace WinUIDesignAndAnimationLab.Demos
 {
     public sealed partial class BlendMixText : UserControl
     {
-        private Compositor Compositor => MainWindow.CurrentWindow.Compositor;
-
-
-
         public BlendMixText()
         {
             this.InitializeComponent();
@@ -58,6 +40,22 @@ namespace WinUIDesignAndAnimationLab.Demos
             AddTextToRoot(BlendEffectMode.VividLight);
         }
 
+        private Compositor Compositor => MainWindow.CurrentWindow.Compositor;
+
+        public TextToBrushWrapper CreateTextToBrushWrapper(string text, Windows.UI.Color fontColor)
+        {
+            var result = new TextToBrushWrapper
+            {
+                Text = text,
+                FontSize = 45,
+                Width = 400,
+                Height = 70,
+                FontColor = fontColor,
+            };
+            result.Brush.VerticalAlignmentRatio = 0;
+            return result;
+        }
+
         private void AddTextToRoot(BlendEffectMode blendEffectMode)
         {
             var redBrushWrapper = CreateTextToBrushWrapper(blendEffectMode.ToString(), Colors.Red);
@@ -72,6 +70,23 @@ namespace WinUIDesignAndAnimationLab.Demos
 
             ElementCompositionPreview.SetElementChildVisual(background, textVisual);
             Root.Children.Add(background);
+        }
+
+        private CompositionBrush CreateBrush(CompositionBrush foreground, CompositionBrush background, BlendEffectMode blendEffectMode)
+        {
+            var compositor = this.Compositor;
+            var effect = new BlendEffect()
+            {
+                Mode = blendEffectMode,
+                Foreground = new CompositionEffectSourceParameter("Main"),
+                Background = new CompositionEffectSourceParameter("Tint"),
+            };
+            var effectFactory = compositor.CreateEffectFactory(effect);
+            var compositionBrush = effectFactory.CreateBrush();
+            compositionBrush.SetSourceParameter("Main", foreground);
+            compositionBrush.SetSourceParameter("Tint", background);
+
+            return compositionBrush;
         }
 
         private CompositionLinearGradientBrush CreateGradientBrush()
@@ -89,39 +104,6 @@ namespace WinUIDesignAndAnimationLab.Demos
             gradientBrush.ColorStops.Add(startGradientStop);
             gradientBrush.ColorStops.Add(endGradientStop);
             return gradientBrush;
-        }
-
-        public TextToBrushWrapper CreateTextToBrushWrapper(string text, Windows.UI.Color fontColor)
-        {
-            var result = new TextToBrushWrapper
-            {
-                Text = text,
-                FontSize = 45,
-                Width = 400,
-                Height = 70,
-                FontColor = fontColor,
-            };
-            result.Brush.VerticalAlignmentRatio = 0;
-            return result;
-        }
-
-
-
-        private CompositionBrush CreateBrush(CompositionBrush foreground, CompositionBrush background, BlendEffectMode blendEffectMode)
-        {
-            var compositor = this.Compositor;
-            var effect = new BlendEffect()
-            {
-                Mode = blendEffectMode,
-                Foreground = new CompositionEffectSourceParameter("Main"),
-                Background = new CompositionEffectSourceParameter("Tint"),
-            };
-            var effectFactory = compositor.CreateEffectFactory(effect);
-            var compositionBrush = effectFactory.CreateBrush();
-            compositionBrush.SetSourceParameter("Main", foreground);
-            compositionBrush.SetSourceParameter("Tint", background);
-
-            return compositionBrush;
         }
     }
 }
