@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using WinUIDesignAndAnimationLab.Demos;
 using WinUIDesignAndAnimationLab.Demos.GalaxyShuttles;
 using WinUIDesignAndAnimationLab.Demos.GlitchArtDemo;
+using WinUIDesignAndAnimationLab.Demos.Gooey;
 using WinUIDesignAndAnimationLab.Demos.LikeButtons;
 
 namespace WinUIDesignAndAnimationLab
@@ -56,6 +57,11 @@ namespace WinUIDesignAndAnimationLab
           //new ExampleDefinition("Three Actions With One Click", typeof(ThreeActionsWithOneClick)),
           //new ExampleDefinition("Popup UserControl", typeof(PopupUserControlDemo)),
           //new ExampleDefinition("Gooey Button", typeof(GooeyButtonDemoPage)),
+           new ExampleDefinition("Gooey Ellipse", typeof(GooeyEllipseDemoPage),new Uri("https://codepen.io/Chokcoco/pen/QqWBqV")),
+               new ExampleDefinition("Gooey Ellipse 2", typeof(GooeyEllipseDemo2Page),new Uri("https://codepen.io/Chokcoco/pen/QqWBqV")),
+                   new ExampleDefinition("Gooey Footer", typeof(GooeyFooter),new Uri("https://www.cnblogs.com/coco1s/p/16445448.html")),
+                              new ExampleDefinition("Gooey Footer2", typeof(GooeyFooter2),new Uri("https://www.cnblogs.com/coco1s/p/16445448.html")),
+                 new ExampleDefinition("Text Morph", typeof(TextMorph),new Uri("https://codepen.io/Valgo/pen/PowZaNY")),
           new ExampleDefinition("Glitch Art", typeof(GlitchArtDemoPage)),
           new ExampleDefinition("Glitch Art Many Words", typeof(GlitchArtWithManyWordsDemoPage)),
           new ExampleDefinition("Blend Mix Image", typeof(BlendMixImage)),

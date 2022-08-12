@@ -55,6 +55,11 @@
     <None Remove="Controls\GooeyButton.xaml" />
     <None Remove="Controls\GooeyButtonItem.xaml" />
     <None Remove="Demos\GalaxyShuttles\Galaxy.png" />
+    <None Remove="Demos\Gooey\GooeyEllipseDemo2Page.xaml" />
+    <None Remove="Demos\Gooey\GooeyEllipseDemoPage.xaml" />
+    <None Remove="Demos\Gooey\GooeyFooter.xaml" />
+    <None Remove="Demos\Gooey\GooeyFooter2.xaml" />
+    <None Remove="Demos\Gooey\TextMorph.xaml" />
     <None Remove="MainPage.xaml" />
     <None Remove="Themes\BubbleButton.xaml" />
     <None Remove="Themes\BubbleButtonStyle.xaml" />
@@ -153,5 +158,30 @@
   </ItemGroup>
   <ItemGroup>
     <PRIResource Remove="Demos\ControlCenter\**" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="Demos\Gooey\GooeyFooter2.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="Demos\Gooey\GooeyFooter.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="Demos\Gooey\TextMorph.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="Demos\Gooey\GooeyEllipseDemo2Page.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="Demos\Gooey\GooeyEllipseDemoPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
 </Project>
