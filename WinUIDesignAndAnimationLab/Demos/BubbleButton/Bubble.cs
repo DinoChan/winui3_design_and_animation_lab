@@ -1,4 +1,4 @@
-﻿using DesignAndAnimationLab.Common;
+﻿using WinUIDesignAndAnimationLab.Common;
 using Microsoft.Graphics.Canvas;
 using Microsoft.Graphics.Canvas.UI.Composition;
 using System;
@@ -7,9 +7,12 @@ using System.Linq;
 using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
-using Windows.Foundation;
+using Microsoft.Foundation;
+using Microsoft.UI;
+using Microsoft.UI.Composition;
 using Windows.UI;
-using Windows.UI.Composition;
+using Microsoft.Graphics.DirectX;
+using Windows.Foundation;
 
 namespace WinUIDesignAndAnimationLab.Demos.BubbleButton
 {
@@ -79,7 +82,7 @@ namespace WinUIDesignAndAnimationLab.Demos.BubbleButton
 
         private void Draw(bool IsFill, Color color)
         {
-            _surface = _graphicsDevice.CreateDrawingSurface(Size.ToSize(), Windows.Graphics.DirectX.DirectXPixelFormat.B8G8R8A8UIntNormalized, Windows.Graphics.DirectX.DirectXAlphaMode.Premultiplied);
+            _surface = _graphicsDevice.CreateDrawingSurface(Size.ToSize(), DirectXPixelFormat.B8G8R8A8UIntNormalized, DirectXAlphaMode.Premultiplied);
             using (var dc = CanvasComposition.CreateDrawingSession(_surface))
             {
                 dc.Clear(Colors.Transparent);

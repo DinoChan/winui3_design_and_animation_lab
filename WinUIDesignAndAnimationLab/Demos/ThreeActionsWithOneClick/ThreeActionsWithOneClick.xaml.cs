@@ -1,19 +1,20 @@
-﻿using System;
+﻿using Microsoft.UI.Xaml.Media.Animation;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
-using Windows.UI.Input;
 using Windows.UI.Xaml;
-using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
+using Microsoft.UI.Xaml.Controls;
+using Microsoft.UI.Xaml.Controls.Primitives;
 using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
-using Windows.UI.Xaml.Media.Animation;
-using Windows.UI.Xaml.Navigation;
+using Microsoft.UI.Xaml.Input;
+using Microsoft.UI.Xaml.Media;
+using Microsoft.UI.Xaml.Media.Animation;
+using Microsoft.UI.Xaml.Navigation;
+using Microsoft.UI.Input;
 
 //https://go.microsoft.com/fwlink/?LinkId=234236 上介绍了“用户控件”项模板
 
@@ -40,7 +41,7 @@ namespace WinUIDesignAndAnimationLab.Demos
 
 
 
-        private void OnGestureRecognizerTapped(object sender, Windows.UI.Input.TappedEventArgs e)
+        private void OnGestureRecognizerTapped(object sender, Microsoft.UI.Input.TappedEventArgs e)
         {
             var progressButton = sender as ProgressButton;
             if (progressButton.State == ProgressState.Idle)
@@ -51,7 +52,7 @@ namespace WinUIDesignAndAnimationLab.Demos
 
 
 
-        private void OnGestureRecognizerHolding(object sender, Windows.UI.Input.HoldingEventArgs e)
+        private void OnGestureRecognizerHolding(object sender, Microsoft.UI.Input.HoldingEventArgs e)
         {
             var progressButton = sender as ProgressButton;
             if (e.HoldingState == HoldingState.Started)
@@ -95,5 +96,7 @@ namespace WinUIDesignAndAnimationLab.Demos
             CoinButton.State = ProgressState.Completed;
             FavoriteButton.State = ProgressState.Completed;
         }
+
+     
     }
 }

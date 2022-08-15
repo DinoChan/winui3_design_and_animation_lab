@@ -1,8 +1,10 @@
 ﻿using System;
 using WinUIDesignAndAnimationLab.Demos;
+using WinUIDesignAndAnimationLab.Demos.BubbleButton;
 using WinUIDesignAndAnimationLab.Demos.GalaxyShuttles;
 using WinUIDesignAndAnimationLab.Demos.GlitchArtDemo;
 using WinUIDesignAndAnimationLab.Demos.Gooey;
+using WinUIDesignAndAnimationLab.Demos.GooeyButtonDemo;
 using WinUIDesignAndAnimationLab.Demos.LikeButtons;
 
 namespace WinUIDesignAndAnimationLab
@@ -48,9 +50,9 @@ namespace WinUIDesignAndAnimationLab
     public class ExampleDefinitions
     {
         public static ExampleDefinition[] Definitions { get; } = {
-          //new ExampleDefinition("Three Actions With One Click", typeof(ThreeActionsWithOneClick)),
+          new ExampleDefinition("Three Actions With One Click", typeof(ThreeActionsWithOneClick)),
           //new ExampleDefinition("Popup UserControl", typeof(PopupUserControlDemo)),
-          //new ExampleDefinition("Gooey Button", typeof(GooeyButtonDemoPage)),
+          new ExampleDefinition("Gooey Button", typeof(GooeyButtonDemoPage)),
            new ExampleDefinition("Gooey Ellipse", typeof(GooeyEllipseDemoPage),new Uri("https://codepen.io/Chokcoco/pen/QqWBqV")),
                new ExampleDefinition("Gooey Ellipse 2", typeof(GooeyEllipseDemo2Page),new Uri("https://codepen.io/Chokcoco/pen/QqWBqV")),
                    new ExampleDefinition("Gooey Footer", typeof(GooeyFooter),new Uri("https://www.cnblogs.com/coco1s/p/16445448.html")),
@@ -60,7 +62,7 @@ namespace WinUIDesignAndAnimationLab
           new ExampleDefinition("Glitch Art Many Words", typeof(GlitchArtWithManyWordsDemoPage)),
           new ExampleDefinition("Blend Mix Image", typeof(BlendMixImage)),
           new ExampleDefinition("Blend Mix Text", typeof(BlendMixText)),
-          //new ExampleDefinition("Bubble Button", typeof(BubbleButtonDemo),new Uri("https://github.com/cnbluefire/BubbleButton")),
+          new ExampleDefinition("Bubble Button", typeof(BubbleButtonDemo),new Uri("https://github.com/cnbluefire/BubbleButton")),
           new ExampleDefinition("Twitter Like Button", typeof(MattHenleysLikeButton)),
           new ExampleDefinition("Walking Cat", typeof(WalkingCat)),
           new ExampleDefinition("Transparent Cube", typeof(TransparentCube)),

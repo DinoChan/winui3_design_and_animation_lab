@@ -1,21 +1,26 @@
-﻿using DesignAndAnimationLab.Common;
+﻿using WinUIDesignAndAnimationLab.Common;
 using Microsoft.Graphics.Canvas;
 using Microsoft.Graphics.Canvas.UI.Composition;
+using Microsoft.UI.Xaml.Controls;
+using Microsoft.UI.Xaml.Hosting;
+using Microsoft.UI.Xaml.Shapes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Windows.ApplicationModel;
-using Windows.Foundation;
+
+
+using Microsoft.UI.Xaml.Controls;
+using Microsoft.UI.Xaml.Hosting;
+using Microsoft.UI.Xaml.Media;
+using Microsoft.UI.Xaml.Shapes;
+using Microsoft.UI.Xaml;
+using Microsoft.UI;
 using Windows.Graphics.Display;
-using Windows.UI;
-using Windows.UI.Composition;
-using Windows.UI.Xaml;
-using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Hosting;
-using Windows.UI.Xaml.Media;
-using Windows.UI.Xaml.Shapes;
+using Microsoft.UI.Composition;
+using Windows.Foundation;
 
 namespace WinUIDesignAndAnimationLab.Demos.BubbleButton
 {
@@ -29,7 +34,7 @@ namespace WinUIDesignAndAnimationLab.Demos.BubbleButton
         }
 
         Rectangle BubbleHost;
-        Color ForegroundColor;
+        Windows.UI.Color ForegroundColor;
 
         Compositor _Compositor;
         Visual _HostVisual;
@@ -66,8 +71,8 @@ namespace WinUIDesignAndAnimationLab.Demos.BubbleButton
         //初始化CanvasDevice和GraphicsDevice
         private void SetupDevices()
         {
-            DisplayInformation.DisplayContentsInvalidated += DisplayInformation_DisplayContentsInvalidated;
-
+            //DisplayInformation.DisplayContentsInvalidated += DisplayInformation_DisplayContentsInvalidated;
+            
             _canvasDevice = CanvasDevice.GetSharedDevice();
             _graphicsDevice = CanvasComposition.CreateCompositionGraphicsDevice(_Compositor, _canvasDevice);
 

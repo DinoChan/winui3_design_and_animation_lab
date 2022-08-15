@@ -1,4 +1,4 @@
-﻿using DesignAndAnimationLab.Common;
+﻿using WinUIDesignAndAnimationLab.Common;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,13 +6,16 @@ using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 using Windows.ApplicationModel;
-using Windows.UI;
-using Windows.UI.Composition;
+
 using Windows.UI.Xaml;
-using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Hosting;
-using Windows.UI.Xaml.Media;
-using Windows.UI.Xaml.Shapes;
+using Microsoft.UI.Xaml.Controls;
+using Microsoft.UI.Xaml.Hosting;
+using Microsoft.UI.Xaml.Media;
+using Microsoft.UI.Xaml.Shapes;
+using Microsoft.UI.Composition;
+using Microsoft.UI.Xaml;
+using Windows.UI;
+using Microsoft.UI;
 
 namespace WinUIDesignAndAnimationLab.Demos.BubbleButton
 {

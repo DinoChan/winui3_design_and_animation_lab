@@ -24,7 +24,7 @@ using Microsoft.UI.Xaml;
 
 // The Templated Control item template is documented at https://go.microsoft.com/fwlink/?LinkId=234235
 
-namespace DesignAndAnimationLab
+namespace WinUIDesignAndAnimationLab
 {
     [ContentProperty(Name = "Content")]
     public sealed class GooeyButton : ItemsControl
@@ -47,7 +47,7 @@ namespace DesignAndAnimationLab
         Shape BackgroundShape;
         TranslateTransform BackgroundShapeTranslate;
         GooeyButtonItemsPanel panel;
-        CanvasAnimatedControl Win2DCanvas;
+        CanvasControl Win2DCanvas;
         bool unloaded = false;
         bool isAnimating = false;
         long brushColorToken = -1;
@@ -285,7 +285,7 @@ namespace DesignAndAnimationLab
                 }
                 if (Win2DCanvas == null)
                 {
-                    Win2DCanvas = new CanvasAnimatedControl();
+                    Win2DCanvas = new CanvasControl();
                     Win2DHost.Children.Add(Win2DCanvas);
                     Win2DCanvas.IsHitTestVisible = false;
                     Win2DCanvas.CreateResources += OnWin2DCreateResources;
@@ -321,7 +321,7 @@ namespace DesignAndAnimationLab
 
         #region Win2D
 
-        private void OnWin2DCreateResources(CanvasAnimatedControl sender, CanvasCreateResourcesEventArgs args)
+        private void OnWin2DCreateResources(CanvasControl sender, CanvasCreateResourcesEventArgs args)
         {
             var effect1 = new GaussianBlurEffect()
             {
@@ -363,7 +363,7 @@ namespace DesignAndAnimationLab
             image = effect2;
         }
 
-        private void OnWin2DDraw(ICanvasAnimatedControl sender, CanvasAnimatedDrawEventArgs args)
+        private void OnWin2DDraw(CanvasControl sender, CanvasDrawEventArgs args)
         {
             if (panel != null && gooeyButtonItemsProperty != null && property.BackgroundColor.HasValue)
             {
@@ -400,6 +400,7 @@ namespace DesignAndAnimationLab
 
                 }
             }
+            sender.Invalidate();
         }
 
 
@@ -453,8 +454,8 @@ namespace DesignAndAnimationLab
         private void OnUnloaded(object sender, RoutedEventArgs e)
         {
             unloaded = true;
+        
             Win2DCanvas.Draw -= OnWin2DDraw;
-            Win2DCanvas.Paused = true;
             panel = null;
             Win2DCanvas.RemoveFromVisualTree();
             Win2DHost.Children.Remove(Win2DCanvas);

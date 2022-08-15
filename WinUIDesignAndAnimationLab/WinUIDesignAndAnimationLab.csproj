@@ -14,38 +14,17 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Remove="Demos\AcrylicAndBlur\**" />
-    <Compile Remove="Demos\BubbleButton\**" />
-    <Compile Remove="Demos\GooeyButtonDemo\**" />
     <Compile Remove="Demos\LiquidFill\**" />
     <Compile Remove="Demos\PopupUserControl\**" />
-    <Compile Remove="Demos\ThreeActionsWithOneClick\**" />
     <EmbeddedResource Remove="Demos\AcrylicAndBlur\**" />
-    <EmbeddedResource Remove="Demos\BubbleButton\**" />
-    <EmbeddedResource Remove="Demos\GooeyButtonDemo\**" />
     <EmbeddedResource Remove="Demos\LiquidFill\**" />
     <EmbeddedResource Remove="Demos\PopupUserControl\**" />
-    <EmbeddedResource Remove="Demos\ThreeActionsWithOneClick\**" />
     <None Remove="Demos\AcrylicAndBlur\**" />
-    <None Remove="Demos\BubbleButton\**" />
-    <None Remove="Demos\GooeyButtonDemo\**" />
     <None Remove="Demos\LiquidFill\**" />
     <None Remove="Demos\PopupUserControl\**" />
-    <None Remove="Demos\ThreeActionsWithOneClick\**" />
     <Page Remove="Demos\AcrylicAndBlur\**" />
-    <Page Remove="Demos\BubbleButton\**" />
-    <Page Remove="Demos\GooeyButtonDemo\**" />
     <Page Remove="Demos\LiquidFill\**" />
     <Page Remove="Demos\PopupUserControl\**" />
-    <Page Remove="Demos\ThreeActionsWithOneClick\**" />
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Remove="Controls\GooeyButton.cs" />
-    <Compile Remove="Controls\GooeyButtonItem.cs" />
-    <Compile Remove="Controls\GooeyButtonItemsPanel.cs" />
-    <Compile Remove="Controls\ProgressButton.Constants.cs" />
-    <Compile Remove="Controls\ProgressButton.cs" />
-    <Compile Remove="Controls\ProgressButton.Properties.cs" />
-    <Compile Remove="Controls\ProgressState.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Remove="Controls\GooeyButton.xaml" />
@@ -59,6 +38,7 @@
     <None Remove="MainPage.xaml" />
     <None Remove="Themes\BubbleButton.xaml" />
     <None Remove="Themes\BubbleButtonStyle.xaml" />
+    <None Remove="Themes\Generic.xaml" />
     <None Remove="Themes\ProgressButton.xaml" />
     <None Remove="Thumbnails\AcrylicandBlur.png" />
     <None Remove="Thumbnails\BlendMixImage.png" />
@@ -74,13 +54,6 @@
     <None Remove="Thumbnails\TransparentCube.png" />
     <None Remove="Thumbnails\TwitterLikeButton.png" />
     <None Remove="Thumbnails\WalkingCat.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Page Remove="Controls\GooeyButton.xaml" />
-    <Page Remove="Controls\GooeyButtonItem.xaml" />
-    <Page Remove="Themes\BubbleButton.xaml" />
-    <Page Remove="Themes\BubbleButtonStyle.xaml" />
-    <Page Remove="Themes\ProgressButton.xaml" />
   </ItemGroup>
 
   <ItemGroup>
@@ -127,16 +100,7 @@
     <ProjectCapability Include="Msix" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Controls\" />
-  </ItemGroup>
-  <ItemGroup>
     <PRIResource Remove="Demos\AcrylicAndBlur\**" />
-  </ItemGroup>
-  <ItemGroup>
-    <PRIResource Remove="Demos\BubbleButton\**" />
-  </ItemGroup>
-  <ItemGroup>
-    <PRIResource Remove="Demos\GooeyButtonDemo\**" />
   </ItemGroup>
   <ItemGroup>
     <PRIResource Remove="Demos\LiquidFill\**" />
@@ -145,7 +109,24 @@
     <PRIResource Remove="Demos\PopupUserControl\**" />
   </ItemGroup>
   <ItemGroup>
-    <PRIResource Remove="Demos\ThreeActionsWithOneClick\**" />
+    <Page Update="Themes\ProgressButton.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="Themes\BubbleButtonStyle.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="Themes\BubbleButton.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="Controls\GooeyButton.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Page Update="MainPage.xaml">
@@ -174,6 +155,11 @@
   </ItemGroup>
   <ItemGroup>
     <Page Update="Demos\Gooey\GooeyEllipseDemoPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="Themes\Generic.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
