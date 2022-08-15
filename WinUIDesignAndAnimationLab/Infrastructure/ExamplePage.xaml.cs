@@ -2,58 +2,50 @@
 //
 // Licensed under the MIT License. See LICENSE.txt in the project root for license information.
 
+using System;
+using Windows.ApplicationModel;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Navigation;
-using System;
 
-namespace WinUIDesignAndAnimationLab
+namespace WinUIDesignAndAnimationLab;
+
+public sealed partial class ExamplePage : Page
 {
-    public sealed partial class ExamplePage : Page
+    public ExamplePage()
     {
-        private NavigationHelper navigationHelper;
+        InitializeComponent();
 
-        public ExamplePage()
+        NavigationHelper = new NavigationHelper(this);
+
+        if (DesignMode.DesignModeEnabled) DataContext = new ExampleDefinition("An Example", null);
+
+        //if (this.navigationHelper.HasHardwareButtons)
+        //{
+        //    this.backButton.Visibility = Visibility.Collapsed;
+        //}
+    }
+
+    public NavigationHelper NavigationHelper { get; }
+
+    protected override void OnNavigatedFrom(NavigationEventArgs e)
+    {
+        NavigationHelper.OnNavigatedFrom(e);
+    }
+
+    protected override void OnNavigatedTo(NavigationEventArgs e)
+    {
+        NavigationHelper.OnNavigatedTo(e);
+
+        var example = e.Parameter as ExampleDefinition;
+        if (example != null)
         {
-            this.InitializeComponent();
-
-            this.navigationHelper = new NavigationHelper(this);
-
-            if (Windows.ApplicationModel.DesignMode.DesignModeEnabled)
+            DataContext = example;
+            if (example.Control != null)
             {
-                this.DataContext = new ExampleDefinition("An Example", null);
-            }
-
-            //if (this.navigationHelper.HasHardwareButtons)
-            //{
-            //    this.backButton.Visibility = Visibility.Collapsed;
-            //}
-        }
-
-        public NavigationHelper NavigationHelper
-        {
-            get { return this.navigationHelper; }
-        }
-
-        protected override void OnNavigatedFrom(NavigationEventArgs e)
-        {
-            this.navigationHelper.OnNavigatedFrom(e);
-        }
-
-        protected override void OnNavigatedTo(NavigationEventArgs e)
-        {
-            this.navigationHelper.OnNavigatedTo(e);
-
-            var example = e.Parameter as ExampleDefinition;
-            if (example != null)
-            {
-                this.DataContext = example;
-                if (example.Control != null)
-                {
-                    var control = Activator.CreateInstance(example.Control) as FrameworkElement;
-                    this.RequestedTheme = control.RequestedTheme;
-                    this.exampleContent.Children.Add(control);
-                }
+                var control = Activator.CreateInstance(example.Control) as FrameworkElement;
+                RequestedTheme = control.RequestedTheme;
+                exampleContent.Children.Add(control);
             }
         }
     }

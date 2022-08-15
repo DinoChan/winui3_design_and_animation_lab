@@ -1,36 +1,31 @@
-﻿using Microsoft.UI.Xaml;
-using Microsoft.UI.Xaml.Hosting;
-using System;
+﻿using System;
 using System.Numerics;
+using Microsoft.UI.Xaml;
+using Microsoft.UI.Xaml.Hosting;
 
-namespace WinUIDesignAndAnimationLab.Common
+namespace WinUIDesignAndAnimationLab.Common;
+
+public static class VisualExtensions
 {
-    public static class VisualExtensions
-    {
-        public static readonly DependencyProperty IsBindCenterPointProperty =
-            DependencyProperty.RegisterAttached("IsBindCenterPoint", typeof(bool), typeof(VisualExtensions), new PropertyMetadata(false, (s, a) =>
+    public static readonly DependencyProperty IsBindCenterPointProperty =
+        DependencyProperty.RegisterAttached("IsBindCenterPoint", typeof(bool), typeof(VisualExtensions),
+            new PropertyMetadata(false, (s, a) =>
             {
                 if (a.NewValue != a.OldValue)
-                {
                     if (s is UIElement ele)
                     {
                         if (a.NewValue is true)
-                        {
                             ElementCompositionPreview.GetElementVisual(ele).BindCenterPoint();
-                        }
                         else
-                        {
                             ElementCompositionPreview.GetElementVisual(ele).StopAnimation("CenterPoint");
-                        }
                     }
-                }
             }));
 
-        public static readonly DependencyProperty ScaleProperty =
-            DependencyProperty.RegisterAttached("Scale", typeof(string), typeof(VisualExtensions), new PropertyMetadata("1,1,1", (s, a) =>
+    public static readonly DependencyProperty ScaleProperty =
+        DependencyProperty.RegisterAttached("Scale", typeof(string), typeof(VisualExtensions), new PropertyMetadata(
+            "1,1,1", (s, a) =>
             {
-                if (!string.Equals(a.NewValue, a.OldValue))
-                {
+                if (!Equals(a.NewValue, a.OldValue))
                     if (s is UIElement element)
                     {
                         var newValue = a.NewValue as string;
@@ -46,14 +41,13 @@ namespace WinUIDesignAndAnimationLab.Common
                             throw new ArgumentException("数据不是Vector3");
                         }
                     }
-                }
             }));
 
-        public static readonly DependencyProperty TransationsProperty =
-            DependencyProperty.RegisterAttached("Transations", typeof(string), typeof(VisualExtensions), new PropertyMetadata(null, (s, a) =>
+    public static readonly DependencyProperty TransationsProperty =
+        DependencyProperty.RegisterAttached("Transations", typeof(string), typeof(VisualExtensions),
+            new PropertyMetadata(null, (s, a) =>
             {
-                if (!string.Equals(a.NewValue, a.OldValue))
-                {
+                if (!Equals(a.NewValue, a.OldValue))
                     if (s is UIElement ele)
                     {
                         if (a.NewValue is string str)
@@ -63,46 +57,42 @@ namespace WinUIDesignAndAnimationLab.Common
                             {
                                 var visual = ElementCompositionPreview.GetElementVisual(ele);
                                 visual.ImplicitAnimations = visual.Compositor.CreateImplicitAnimationCollection();
-                                foreach (var item in arr)
-                                {
-                                    visual.ImplicitAnimations.CreateImplicitAnimation(item);
-                                }
+                                foreach (var item in arr) visual.ImplicitAnimations.CreateImplicitAnimation(item);
                                 return;
                             }
                         }
+
                         ElementCompositionPreview.GetElementVisual(ele).ImplicitAnimations = null;
                     }
-                }
             }));
 
-        public static bool GetIsBindCenterPoint(DependencyObject obj)
-        {
-            return (bool)obj.GetValue(IsBindCenterPointProperty);
-        }
+    public static bool GetIsBindCenterPoint(DependencyObject obj)
+    {
+        return (bool)obj.GetValue(IsBindCenterPointProperty);
+    }
 
-        public static string GetScale(DependencyObject obj)
-        {
-            return (string)obj.GetValue(ScaleProperty);
-        }
+    public static string GetScale(DependencyObject obj)
+    {
+        return (string)obj.GetValue(ScaleProperty);
+    }
 
-        public static string GetTransations(DependencyObject obj)
-        {
-            return (string)obj.GetValue(TransationsProperty);
-        }
+    public static string GetTransations(DependencyObject obj)
+    {
+        return (string)obj.GetValue(TransationsProperty);
+    }
 
-        public static void SetIsBindCenterPoint(DependencyObject obj, bool value)
-        {
-            obj.SetValue(IsBindCenterPointProperty, value);
-        }
+    public static void SetIsBindCenterPoint(DependencyObject obj, bool value)
+    {
+        obj.SetValue(IsBindCenterPointProperty, value);
+    }
 
-        public static void SetScale(DependencyObject obj, string value)
-        {
-            obj.SetValue(ScaleProperty, value);
-        }
+    public static void SetScale(DependencyObject obj, string value)
+    {
+        obj.SetValue(ScaleProperty, value);
+    }
 
-        public static void SetTransations(DependencyObject obj, string value)
-        {
-            obj.SetValue(TransationsProperty, value);
-        }
+    public static void SetTransations(DependencyObject obj, string value)
+    {
+        obj.SetValue(TransationsProperty, value);
     }
 }

@@ -1,43 +1,43 @@
-﻿using Microsoft.UI.Xaml;
+﻿using System;
+using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Media.Animation;
-using System;
 
 //https://go.microsoft.com/fwlink/?LinkId=234236 上介绍了“用户控件”项模板
 
-namespace WinUIDesignAndAnimationLab.Demos
+namespace WinUIDesignAndAnimationLab.Demos;
+
+public sealed partial class WalkingCat : UserControl
 {
-    public sealed partial class WalkingCat : UserControl
+    public WalkingCat()
     {
-        public WalkingCat()
-        {
-            this.InitializeComponent();
-        }
+        InitializeComponent();
+    }
 
-        private void OnCatLoaded(object sender, RoutedEventArgs e)
+    private void OnCatLoaded(object sender, RoutedEventArgs e)
+    {
+        var transform = (sender as Image).RenderTransform as CompositeTransform;
+        var storyboard = new Storyboard
         {
-            var transform = (sender as Image).RenderTransform as CompositeTransform;
-            var storyboard = new Storyboard
+            FillBehavior = FillBehavior.Stop,
+            RepeatBehavior = RepeatBehavior.Forever
+        };
+
+        var keyFrames = new DoubleAnimationUsingKeyFrames();
+        Storyboard.SetTarget(keyFrames, transform);
+        Storyboard.SetTargetProperty(keyFrames, nameof(CompositeTransform.TranslateY));
+        for (var i = 0; i < 12; i++)
+        {
+            var keyFrame = new DiscreteDoubleKeyFrame
             {
-                FillBehavior = FillBehavior.Stop,
-                RepeatBehavior = RepeatBehavior.Forever
+                KeyTime = TimeSpan.FromSeconds((i + 1d) / 12d),
+                Value = -(i + 1) * 2391d / 12d
             };
-
-            var keyFrames = new DoubleAnimationUsingKeyFrames();
-            Storyboard.SetTarget(keyFrames, transform);
-            Storyboard.SetTargetProperty(keyFrames, nameof(CompositeTransform.TranslateY));
-            for (var i = 0; i < 12; i++)
-            {
-                var keyFrame = new DiscreteDoubleKeyFrame
-                {
-                    KeyTime = TimeSpan.FromSeconds((i + 1d) / 12d),
-                    Value = -(i + 1) * 2391d / 12d
-                };
-                keyFrames.KeyFrames.Add(keyFrame);
-            }
-            storyboard.Children.Add(keyFrames);
-            storyboard.Begin();
+            keyFrames.KeyFrames.Add(keyFrame);
         }
+
+        storyboard.Children.Add(keyFrames);
+        storyboard.Begin();
     }
 }

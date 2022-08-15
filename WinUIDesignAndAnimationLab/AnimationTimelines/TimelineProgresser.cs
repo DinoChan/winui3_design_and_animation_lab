@@ -1,48 +1,47 @@
-﻿using Microsoft.UI.Xaml;
+﻿using System;
+using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Media.Animation;
-using System;
 
-namespace WinUIDesignAndAnimationLab.AnimationTimelines
+namespace WinUIDesignAndAnimationLab.AnimationTimelines;
+
+public class TimelineProgresser
 {
-    public class TimelineProgresser
+    public TimelineProgresser(double seconds, bool autoReverse)
     {
-        public TimelineProgresser(double seconds, bool autoReverse)
-        {
-            Duration = new Duration(TimeSpan.FromSeconds(seconds));
-            AutoReverse = autoReverse;
-        }
+        Duration = new Duration(TimeSpan.FromSeconds(seconds));
+        AutoReverse = autoReverse;
+    }
 
-        public bool AutoReverse { get; set; }
-        public TimeSpan? BeginTime { get; set; }
-        public Duration Duration { get; set; } = new Duration(TimeSpan.FromSeconds(1));
-        public EasingFunctionBase EasingFunction { get; set; }
-        public bool Forever { get; set; }
+    public bool AutoReverse { get; set; }
+    public TimeSpan? BeginTime { get; set; }
+    public Duration Duration { get; set; } = new(TimeSpan.FromSeconds(1));
+    public EasingFunctionBase EasingFunction { get; set; }
+    public bool Forever { get; set; }
 
-        public double GetCurrentProgress(TimeSpan timeSpan)
-        {
-            var beginTimeTicks = 0l;
+    public double GetCurrentProgress(TimeSpan timeSpan)
+    {
+        var beginTimeTicks = 0l;
 
-            if (BeginTime != null)
-                beginTimeTicks = BeginTime.Value.Ticks;
-            if (timeSpan.Ticks <= beginTimeTicks)
-                return 0;
+        if (BeginTime != null)
+            beginTimeTicks = BeginTime.Value.Ticks;
+        if (timeSpan.Ticks <= beginTimeTicks)
+            return 0;
 
-            var durationTicks = Duration.TimeSpan.Ticks;
-            var scalingFactor = AutoReverse ? 2d : 1d;
-            if ((timeSpan.Ticks - beginTimeTicks) > (durationTicks * scalingFactor) && Forever == false)
-                return 0;
+        var durationTicks = Duration.TimeSpan.Ticks;
+        var scalingFactor = AutoReverse ? 2d : 1d;
+        if (timeSpan.Ticks - beginTimeTicks > durationTicks * scalingFactor && Forever == false)
+            return 0;
 
-            var offsetFromBegin = (timeSpan.Ticks - beginTimeTicks) % (durationTicks * scalingFactor);
+        var offsetFromBegin = (timeSpan.Ticks - beginTimeTicks) % (durationTicks * scalingFactor);
 
-            if (offsetFromBegin > durationTicks)
-                offsetFromBegin = durationTicks * 2 - offsetFromBegin;
+        if (offsetFromBegin > durationTicks)
+            offsetFromBegin = durationTicks * 2 - offsetFromBegin;
 
-            double progress = offsetFromBegin / durationTicks;
+        var progress = offsetFromBegin / durationTicks;
 
-            if (EasingFunction != null)
-                progress = EasingFunction.Ease(progress);
+        if (EasingFunction != null)
+            progress = EasingFunction.Ease(progress);
 
-            return progress;
-        }
+        return progress;
     }
 }

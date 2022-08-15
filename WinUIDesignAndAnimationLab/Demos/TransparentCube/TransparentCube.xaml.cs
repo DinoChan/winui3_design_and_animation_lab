@@ -2,13 +2,12 @@
 
 //https://go.microsoft.com/fwlink/?LinkId=234236 上介绍了“用户控件”项模板
 
-namespace WinUIDesignAndAnimationLab.Demos
+namespace WinUIDesignAndAnimationLab.Demos;
+
+public sealed partial class TransparentCube : UserControl
 {
-    public sealed partial class TransparentCube : UserControl
+    public TransparentCube()
     {
-        public TransparentCube()
-        {
-            this.InitializeComponent();
-        }
+        InitializeComponent();
     }
 }
