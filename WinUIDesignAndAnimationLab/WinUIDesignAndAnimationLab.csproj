@@ -49,7 +49,13 @@
     <None Remove="Thumbnails\GlitchArt.png" />
     <None Remove="Thumbnails\GlitchArtManyWords.png" />
     <None Remove="Thumbnails\GooeyButton.png" />
+    <None Remove="Thumbnails\GooeyEllipse.png" />
+    <None Remove="Thumbnails\GooeyEllipse2.png" />
+    <None Remove="Thumbnails\GooeyEllipsePixelShader.png" />
+    <None Remove="Thumbnails\GooeyFooter.png" />
+    <None Remove="Thumbnails\GooeyFooter2.png" />
     <None Remove="Thumbnails\PopupUserControl.png" />
+    <None Remove="Thumbnails\TextMorph.png" />
     <None Remove="Thumbnails\ThreeActionsWithOneClick.png" />
     <None Remove="Thumbnails\TransparentCube.png" />
     <None Remove="Thumbnails\TwitterLikeButton.png" />
@@ -74,7 +80,13 @@
     <Content Include="Thumbnails\GlitchArt.png" />
     <Content Include="Thumbnails\GlitchArtManyWords.png" />
     <Content Include="Thumbnails\GooeyButton.png" />
+    <Content Include="Thumbnails\GooeyEllipse.png" />
+    <Content Include="Thumbnails\GooeyEllipse2.png" />
+    <Content Include="Thumbnails\GooeyEllipsePixelShader.png" />
+    <Content Include="Thumbnails\GooeyFooter.png" />
+    <Content Include="Thumbnails\GooeyFooter2.png" />
     <Content Include="Thumbnails\PopupUserControl.png" />
+    <Content Include="Thumbnails\TextMorph.png" />
     <Content Include="Thumbnails\ThreeActionsWithOneClick.png" />
     <Content Include="Thumbnails\TransparentCube.png" />
     <Content Include="Thumbnails\TwitterLikeButton.png" />
